@@ -4,7 +4,7 @@ using taskmanager.Services;
 
 namespace taskmanager.Controllers
 {
-    [Route("api/public/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class RoleController : ControllerBase
     {
