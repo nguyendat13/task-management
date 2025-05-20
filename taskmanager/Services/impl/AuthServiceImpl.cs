@@ -28,11 +28,15 @@ namespace taskmanager.Services.impl
 
         public async Task<UserResponseDTO> RegisterAsync(RegisterDTO dto)
         {
-            var exists = await _context.Users.AnyAsync(u =>
-                u.Username == dto.Username || u.Email == dto.Email);
+            //var usernameExists = await _context.Users.AnyAsync(u => u.Username == dto.Username);
+            //var emailExists = await _context.Users.AnyAsync(u => u.Email == dto.Email);
 
-            if (exists)
-                throw new Exception("Username hoặc Email đã tồn tại");
+            //if (usernameExists && emailExists)
+            //    throw new Exception("Username và Email đã tồn tại");
+            //else if (usernameExists)
+            //    throw new Exception("Username đã tồn tại");
+            //else if (emailExists)
+            //    throw new Exception("Email đã tồn tại");
 
             var defaultRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name.ToLower() == "user");
 

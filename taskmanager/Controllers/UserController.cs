@@ -45,11 +45,11 @@ namespace taskmanager.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, UserDTO userDto)
+        public async Task<IActionResult> UpdateUser(int id, UserUpdateDTO userUpdateDto)
         {
             try
             {
-                var success = await _userService.UpdateUserAsync(id, userDto);
+                var success = await _userService.UpdateUserAsync(id, userUpdateDto);
                 if (!success) return NotFound();
                 return NoContent();
             }

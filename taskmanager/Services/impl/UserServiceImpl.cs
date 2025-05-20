@@ -87,31 +87,31 @@ namespace taskmanager.Services.impl
         }
 
 
-        public async Task<bool> UpdateUserAsync(int id, UserDTO userDto)
+        public async Task<bool> UpdateUserAsync(int id, UserUpdateDTO userUpdateDto)
         {
             var user = await _context.Users.FindAsync(id);
             if (user == null) return false;
 
             // Kiểm tra username/email mới có trùng với user khác không
             var exists = await _context.Users.AnyAsync(u =>
-                u.Id != id && (u.Username == userDto.Username || u.Email == userDto.Email));
+                u.Id != id && (u.Username == userUpdateDto.Username || u.Email == userUpdateDto.Email));
 
             if (exists)
                 throw new Exception("Username hoặc Email đã được người khác sử dụng");
 
-            user.Name = userDto.Name;
-            user.Address = userDto.Address;
-            user.Phone = userDto.Phone;
-            user.Username = userDto.Username;
-            user.Email = userDto.Email;
-            user.RoleId = userDto.RoleId;
+            user.Name = userUpdateDto.Name;
+            user.Address = userUpdateDto.Address;
+            user.Phone = userUpdateDto.Phone;
+            user.Username = userUpdateDto.Username;
+            user.Email = userUpdateDto.Email;
+            user.RoleId = userUpdateDto.RoleId;
             user.UpdatedAt = DateTime.UtcNow;
 
             // Chỉ cập nhật password nếu có password mới
-            if (!string.IsNullOrWhiteSpace(userDto.Password))
+            if (!string.IsNullOrWhiteSpace(userUpdateDto.Password))
             {
                 var passwordHasher = new PasswordHasher<User>();
-                user.Password = passwordHasher.HashPassword(user, userDto.Password);
+                user.Password = passwordHasher.HashPassword(user, userUpdateDto.Password);
             }
             await _context.SaveChangesAsync();
             return true;
