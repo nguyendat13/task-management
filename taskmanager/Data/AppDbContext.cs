@@ -19,17 +19,25 @@ namespace taskmanager.Data
         public DbSet<WorkProgress> WorkProgresses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Quan hệ Sender/Receiver rõ ràng
             modelBuilder.Entity<Message>()
                 .HasOne(m => m.Sender)
-                .WithMany() // nếu bạn không có Sender.Messages
+                .WithMany(u => u.SentMessages)
                 .HasForeignKey(m => m.SenderId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Message>()
                 .HasOne(m => m.Receiver)
-                .WithMany() // nếu bạn không có Receiver.Messages
+                .WithMany(u => u.ReceivedMessages)
                 .HasForeignKey(m => m.ReceiverId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Quan hệ TaskItem - Group (nhiều TaskItem thuộc 1 Group)
+            modelBuilder.Entity<TaskItem>()
+                .HasOne(t => t.Group)
+                .WithMany(g => g.Tasks)
+                .HasForeignKey(t => t.GroupId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
 
     }

@@ -19,5 +19,7 @@ namespace taskmanager.Models
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        public ICollection<TaskItem> Tasks { get; set; }
     }
 }

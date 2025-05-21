@@ -13,8 +13,6 @@ namespace taskmanager.Models
         [Required]
         public string Title { get; set; }
 
-        public int? Priority { get; set; }
-
         public string? Description { get; set; }
 
         public string? Detail { get; set; }
@@ -28,12 +26,14 @@ namespace taskmanager.Models
         public int UserId { get; set; }
         public User User { get; set; }
 
+        public int? GroupId { get; set; }
+        public Group? Group { get; set; }
+
         [ForeignKey("WorkProgress")]
         public int? WorkProgressId { get; set; }
         public WorkProgress? WorkProgress { get; set; }
 
         public ICollection<Message> Messages { get; set; }
         public ICollection<Notification> Notifications { get; set; }
-        public ICollection<Group> Groups { get; set; }
     }
 }

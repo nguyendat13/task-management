@@ -90,6 +90,7 @@ namespace taskmanager.Services.impl
                 Token = token,
                 Username = user.Username,
                 Email = user.Email,
+               
                 RoleId = user.RoleId
             };
         }
@@ -99,6 +100,10 @@ namespace taskmanager.Services.impl
             {
             new Claim(JwtRegisteredClaimNames.Sub, user.Username),
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim("phone", user.Phone ?? ""),
+            new Claim("address", user.Address ?? ""),
+
+
             new Claim("userId", user.Id.ToString()),
             new Claim("roleId", user.RoleId?.ToString() ?? "0")
         };
