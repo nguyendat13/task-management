@@ -58,7 +58,7 @@ const UserMenu = () => {
               ref={userMenuRef}
               className="absolute right-0 mt-2 w-48 bg-white text-black rounded-lg shadow-lg border z-50"
             >
-              <a href="#" className="block px-4 py-2 hover:bg-gray-100">Bảng điều khiển</a>
+              <a href="/ho-so" className="block px-4 py-2 hover:bg-gray-100">Hồ sơ</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100">Công việc</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100">Báo cáo</a>
               <a href="#" className="block px-4 py-2 hover:bg-gray-100">Cài đặt</a>

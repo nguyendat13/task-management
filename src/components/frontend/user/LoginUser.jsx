@@ -1,25 +1,28 @@
 import React, { useState } from "react";
 import { login } from "../../../services/AuthService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function LoginUser() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const data = await login({ userNameOrEmail: username, password });
       console.log("Đăng nhập thành công:", data);
-      // xử lý chuyển trang, lưu token ...
+       navigate('/ho-so');
+           window.location.reload();
+
     } catch (err) {
       setError(err.message || "Lỗi đăng nhập");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-400 to-indigo-600 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-r from-gray-400 to-indigo-600 flex items-center justify-center px-4">
       <form
         onSubmit={handleSubmit}
         className="bg-white shadow-lg rounded-lg max-w-md w-full p-10"
