@@ -34,6 +34,10 @@ const ProfileUser = () => {
               <span className="font-medium">Địa chỉ:</span>
               <span>{user.address || "Không có"}</span>
             </div>
+                <div className="flex justify-between">
+              <span className="font-medium">Giới tính:</span>
+              <span>{user.gender || "Không có"}</span>
+            </div>
           </div>
         ) : (
           <p className="text-center text-red-600 font-medium">

@@ -8,6 +8,7 @@ const UserForm  = () => {
     email: "",
     phone: "",
     address: "",
+    gender: "",
     username: "",
     password: "",
     roleId: 3,
@@ -25,6 +26,7 @@ const UserForm  = () => {
             name: data.name || "",
             email: data.email || "",
             phone: data.phone || "",
+            gender: data.gender || "",
             address: data.address || "",
             username: data.username || "",
             password: "", // Để trống
@@ -63,7 +65,7 @@ const UserForm  = () => {
         {id ? "Chỉnh sửa người dùng" : "Thêm người dùng mới"}
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        {["name", "email", "phone", "address", "username"].map((field) => (
+        {["name", "email", "phone", "address", "username" ].map((field) => (
           <input
             key={field}
             name={field}
@@ -74,17 +76,29 @@ const UserForm  = () => {
             className="w-full border border-gray-300 p-2 rounded"
           />
         ))}
+      <select
+          name="gender"
+          value={form.gender}
+          onChange={handleChange}
+          className="w-full border border-gray-300 p-2 rounded"
+          required
+        >
+          <option value="">Chọn giới tính</option>
+          <option value="Nam">Nam</option>
+          <option value="Nữ">Nữ</option>
+          <option value="Khác">Khác</option>
+        </select>
 
-       { id && (
-  <input
-    type="password"
-    name="password"
-    placeholder="Đổi mật khẩu (bỏ trống nếu không đổi)"
-    value={form.password}
-    onChange={handleChange}
-    className="w-full border border-gray-300 p-2 rounded"
-  />
-)}
+            <input
+        type="password"
+        name="password"
+        placeholder={id ? "Đổi mật khẩu (bỏ trống nếu không đổi)" : "Nhập mật khẩu"}
+        value={form.password}
+        onChange={handleChange}
+        className="w-full border border-gray-300 p-2 rounded"
+        required={!id} // Bắt buộc nhập khi tạo mới, không bắt buộc khi cập nhật
+      />
+
 
         
 

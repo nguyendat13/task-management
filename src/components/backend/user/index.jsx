@@ -50,6 +50,7 @@ const UserList = () => {
             <th className="py-2 px-4 text-left">Email</th>
             <th className="py-2 px-4 text-left">Số điện thoại</th>
             <th className="py-2 px-4 text-left">Địa chỉ</th>
+            <th className="py-2 px-4 text-left">Giới tính</th>
 
             <th className="py-2 px-4 text-left">Vai trò</th>
             <th className="py-2 px-4 text-left">Hành động</th>
@@ -63,6 +64,7 @@ const UserList = () => {
         <td className="py-2 px-4">{user.email}</td>
                 <td className="py-2 px-4">{user.phone}</td>
         <td className="py-2 px-4">{user.address}</td>
+                <td className="py-2 px-4">{user.gender}</td>
 
         <td className="py-2 px-4">
           {user.roleId === 4 ? "Admin" : user.roleId === 3 ? "User" : "..."}
