@@ -3,6 +3,7 @@ using taskmanager.Data;
 using taskmanager.DTOs.User;
 using taskmanager.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Reflection;
 
 namespace taskmanager.Services.impl
 {
@@ -24,6 +25,7 @@ namespace taskmanager.Services.impl
                     Name = u.Name,
                     Address = u.Address,
                     Phone = u.Phone,
+                    Gender =u.Gender,
                     Username = u.Username,
                     Email = u.Email,
                     RoleId = u.RoleId
@@ -41,6 +43,7 @@ namespace taskmanager.Services.impl
                 Name = user.Name,
                 Address = user.Address,
                 Phone = user.Phone,
+                Gender = user.Gender,
                 Username = user.Username,
                 Email = user.Email,
                 RoleId = user.RoleId
@@ -61,6 +64,7 @@ namespace taskmanager.Services.impl
                 Name = userDto.Name,
                 Address = userDto.Address,
                 Phone = userDto.Phone,
+                Gender = userDto.Gender,
                 Username = userDto.Username,
                 Email = userDto.Email,
                 RoleId = userDto.RoleId,
@@ -80,6 +84,8 @@ namespace taskmanager.Services.impl
                 Name = user.Name,
                 Address = user.Address,
                 Phone = user.Phone,
+                Gender = user.Gender,
+
                 Username = user.Username,
                 Email = user.Email,
                 RoleId = user.RoleId
@@ -102,6 +108,8 @@ namespace taskmanager.Services.impl
             user.Name = userUpdateDto.Name;
             user.Address = userUpdateDto.Address;
             user.Phone = userUpdateDto.Phone;
+            user.Gender = userUpdateDto.Gender;
+
             user.Username = userUpdateDto.Username;
             user.Email = userUpdateDto.Email;
             user.RoleId = userUpdateDto.RoleId;

@@ -16,6 +16,9 @@ namespace taskmanager.Models
 
         public string? Phone { get; set; }
 
+        public string? Gender { get; set; }
+
+        public string? LoginStatus { get; set; }
         [Required]
         public string Username { get; set; }
 

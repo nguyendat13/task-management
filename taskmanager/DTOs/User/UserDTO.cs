@@ -11,6 +11,7 @@ namespace taskmanager.DTOs.User
 
         [RegularExpression(@"^\d{10}$", ErrorMessage = "Số điện thoại phải gồm đúng 10 chữ số.")]
         public string? Phone { get; set; }
+        public string? Gender { get; set; }
 
         [Required]
         public string Username { get; set; }

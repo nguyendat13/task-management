@@ -10,6 +10,7 @@ namespace taskmanager.DTOs.Auth
         public string? Address { get; set; }
 
         public string? Phone { get; set; }
+        public string? Gender { get; set; }
 
         [Required]
         public string Username { get; set; }

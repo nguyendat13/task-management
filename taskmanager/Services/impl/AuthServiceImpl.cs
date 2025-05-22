@@ -45,6 +45,7 @@ namespace taskmanager.Services.impl
                 Name = dto.Name,
                 Address = dto.Address,
                 Phone = dto.Phone,
+                Gender=dto.Gender,
                 Username = dto.Username,
                 Email = dto.Email,
                 CreatedAt = DateTime.UtcNow,
@@ -63,6 +64,7 @@ namespace taskmanager.Services.impl
                 Name = user.Name,
                 Address = user.Address,
                 Phone = user.Phone,
+                Gender = user.Gender,
                 Username = user.Username,
                 Email = user.Email,
                 RoleId = user.RoleId
@@ -94,7 +96,7 @@ namespace taskmanager.Services.impl
                 RoleId = user.RoleId
             };
         }
-        private string GenerateJwtToken(User user)
+        public string GenerateJwtToken(User user)
         {
             var claims = new[]
             {
@@ -102,6 +104,7 @@ namespace taskmanager.Services.impl
             new Claim(JwtRegisteredClaimNames.Email, user.Email),
             new Claim("phone", user.Phone ?? ""),
             new Claim("address", user.Address ?? ""),
+            new Claim("gender", user.Gender ?? ""),
 
 
             new Claim("userId", user.Id.ToString()),

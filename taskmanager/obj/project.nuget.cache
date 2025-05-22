@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "2iGxVRggl1U=",
+  "dgSpecHash": "QzgTbZW2bYU=",
   "success": true,
   "projectFilePath": "D:\\projects\\.net\\taskmanager\\taskmanager\\taskmanager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguyen phat dat\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\nguyen phat dat\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\8.0.5\\microsoft.aspnetcore.authentication.google.8.0.5.nupkg.sha512",
     "C:\\Users\\nguyen phat dat\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.4\\microsoft.aspnetcore.authentication.jwtbearer.8.0.4.nupkg.sha512",
     "C:\\Users\\nguyen phat dat\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\nguyen phat dat\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",

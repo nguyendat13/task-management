@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using taskmanager.Models;
+using Microsoft.AspNetCore.Authentication.Google;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,8 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = "Cookies"; // hoặc CookieAuthenticationDefaults.AuthenticationScheme
+
 })
 .AddJwtBearer(options =>
 {
@@ -59,6 +63,45 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])
         )
+    };
+})
+.AddCookie("Cookies") // thêm Cookie scheme để xử lý SignIn của Google
+.AddGoogle("Google", options =>
+{
+    options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+    options.CallbackPath = "/signin-google";
+
+    options.Events.OnCreatingTicket = async context =>
+    {
+        var email = context.Principal.FindFirst(ClaimTypes.Email)?.Value;
+        var name = context.Principal.FindFirst(ClaimTypes.Name)?.Value;
+
+        var dbContext = context.HttpContext.RequestServices.GetRequiredService<AppDbContext>();
+
+        var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+        if (user == null)
+        {
+            user = new User
+            {
+                Name = name ?? "No Name",
+                Email = email,
+                Username = email.Split('@')[0],
+                Password = "",
+                RoleId = 3,
+                Phone = "",
+                Gender = "",
+                LoginStatus = "google",
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+
+            dbContext.Users.Add(user);
+            await dbContext.SaveChangesAsync();
+        }
+
+        var identity = (ClaimsIdentity)context.Principal.Identity;
+        identity.AddClaim(new Claim("userId", user.Id.ToString()));
     };
 });
 
