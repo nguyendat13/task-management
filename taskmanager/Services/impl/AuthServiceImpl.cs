@@ -105,6 +105,7 @@ namespace taskmanager.Services.impl
             new Claim("phone", user.Phone ?? ""),
             new Claim("address", user.Address ?? ""),
             new Claim("gender", user.Gender ?? ""),
+            new Claim("name", user.Name ?? ""),
 
 
             new Claim("userId", user.Id.ToString()),

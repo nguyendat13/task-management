@@ -4,6 +4,7 @@ using taskmanager.DTOs.User;
 using taskmanager.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 
 namespace taskmanager.Services.impl
 {
@@ -28,7 +29,8 @@ namespace taskmanager.Services.impl
                     Gender =u.Gender,
                     Username = u.Username,
                     Email = u.Email,
-                    RoleId = u.RoleId
+                    RoleId = u.RoleId,
+                    LoginStatus = u.LoginStatus,
                 }).ToListAsync();
         }
 
@@ -46,7 +48,8 @@ namespace taskmanager.Services.impl
                 Gender = user.Gender,
                 Username = user.Username,
                 Email = user.Email,
-                RoleId = user.RoleId
+                RoleId = user.RoleId,
+                LoginStatus= user.LoginStatus,
             };
         }
 
@@ -68,6 +71,7 @@ namespace taskmanager.Services.impl
                 Username = userDto.Username,
                 Email = userDto.Email,
                 RoleId = userDto.RoleId,
+
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
@@ -109,7 +113,6 @@ namespace taskmanager.Services.impl
             user.Address = userUpdateDto.Address;
             user.Phone = userUpdateDto.Phone;
             user.Gender = userUpdateDto.Gender;
-
             user.Username = userUpdateDto.Username;
             user.Email = userUpdateDto.Email;
             user.RoleId = userUpdateDto.RoleId;
@@ -135,5 +138,28 @@ namespace taskmanager.Services.impl
             await _context.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> ChangePasswordAsync(ChangePasswordDTO model)
+        {
+            var user = await _context.Users.FindAsync(model.UserId);
+            if (user == null) throw new Exception("Người dùng không tồn tại");
+
+            var hasher = new PasswordHasher<User>();
+            var result = hasher.VerifyHashedPassword(user, user.Password, model.OldPassword);
+            if (result == PasswordVerificationResult.Failed)
+                throw new Exception("Mật khẩu cũ không đúng");
+
+            if (model.NewPassword != model.ConfirmPassword)
+                throw new Exception("Mật khẩu xác nhận không khớp");
+
+            user.Password = hasher.HashPassword(user, model.NewPassword);
+            user.UpdatedAt = DateTime.UtcNow;
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
     }
+
+
 }

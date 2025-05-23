@@ -34,6 +34,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IRoleService, RoleServiceImpl>();
 builder.Services.AddScoped<IUserService, UserServiceImpl>();
 builder.Services.AddScoped<IAuthService, AuthServiceImpl>();
+builder.Services.AddScoped<ITaskService, TaskServiceImpl>();
+builder.Services.AddScoped<IWorkProgressService, WorkProgressServiceImpl>();
+
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 // DbContext
