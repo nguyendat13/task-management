@@ -45,6 +45,15 @@ const UserService = {
       return null;
     }
   },
+  changePassword: async (id, passwordData) => {
+  try {
+    const response = await axiosInstance.post(`/User/change-password/${id}`, passwordData);
+    return response.data;
+  } catch (error) {
+    console.error("Change password error:", error.response?.data || error.message);
+    return null;
+  }
+},
 };
 
 export default UserService;
