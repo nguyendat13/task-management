@@ -1,11 +1,12 @@
 import Home from "../components/frontend/Home";
-import TaskList from "../components/frontend/TaskList";
 import LoginUser from "../components/frontend/user/LoginUser";
 import ProfileUser from "../components/frontend/user/ProfileUser";
 import RegisterUser from "../components/frontend/user/RegisterUser";
 import PublicRoute from "./customRoute/PublicRoute";
 import PrivateRoute from "./customRoute/PrivateRoute";
 import GoogleSuccess from "../components/frontend/user/GoogleLogin/GoogleSuccess";
+import TaskList from "../components/frontend/task/TaskList";
+import AddTask from "../components/frontend/task/AddTask";
 
 const RouterSite =[
     {path: "/",element: <Home />,},
@@ -17,6 +18,8 @@ const RouterSite =[
   // CHỈ CHO người đã đăng nhập truy cập
   { path: "/ho-so", element: <PrivateRoute element={<ProfileUser />} /> },
   { path: "/danh-sach-cong-viec", element: <PrivateRoute element={<TaskList />} /> },
+  { path: "/them-cong-viec-moi", element: <PrivateRoute element={<AddTask />} /> },
+
 ]
 
 export default RouterSite;
