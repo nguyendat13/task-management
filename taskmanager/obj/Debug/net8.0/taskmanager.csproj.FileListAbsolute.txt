@@ -18,11 +18,6 @@ D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\taskmanager.MvcApplica
 D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\taskmanager.MvcApplicationPartsAssemblyInfo.cache
 D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets.build.json
 D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets.development.json
-D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets\msbuild.taskmanager.Microsoft.AspNetCore.StaticWebAssets.props
-D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets\msbuild.build.taskmanager.props
-D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.taskmanager.props
-D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.taskmanager.props
-D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets.pack.json
 D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\scopedcss\bundle\taskmanager.styles.css
 D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\taskmana.F5F6AC1A.Up2Date
 D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\taskmanager.dll
@@ -118,3 +113,6 @@ D:\projects\.net\taskmanager\taskmanager\bin\Debug\net8.0\Microsoft.IdentityMode
 D:\projects\.net\taskmanager\taskmanager\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\projects\.net\taskmanager\taskmanager\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 D:\projects\.net\taskmanager\taskmanager\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
+D:\projects\.net\taskmanager\taskmanager\bin\Debug\net8.0\taskmanager.staticwebassets.endpoints.json
+D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets.build.json.cache
+D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets.build.endpoints.json

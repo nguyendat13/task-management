@@ -9,10 +9,6 @@ namespace taskmanager.Models
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("TaskItem")]
-        public int? TaskId { get; set; }
-        public TaskItem? TaskItem { get; set; }
-
         public string? Duty { get; set; }
 
         public string? Name { get; set; }

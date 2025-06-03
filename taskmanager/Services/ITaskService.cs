@@ -5,6 +5,8 @@ namespace taskmanager.Services
 {
     public interface ITaskService
     {
+        Task<IEnumerable<TaskDTO>> GetPersonalTasksAsync(int userId);
+
         Task<IEnumerable<TaskDTO>> GetAllTasksAsync();
         Task<TaskDTO?> GetTaskByIdAsync(int id);
         Task<IEnumerable<TaskDTO>> GetTasksByUserIdAsync(int userId);

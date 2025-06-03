@@ -30,9 +30,17 @@ public class TaskController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateTaskDTO dto)
     {
-        var createdTask = await _service.CreateTaskAsync(dto);
-        return CreatedAtAction(nameof(GetById), new { id = createdTask.Id }, createdTask);
+        try
+        {
+            var createdTask = await _service.CreateTaskAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { id = createdTask.Id }, createdTask);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { message = ex.Message });
+        }
     }
+
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] CreateTaskDTO dto)
@@ -46,5 +54,13 @@ public class TaskController : ControllerBase
     {
         var result = await _service.DeleteTaskAsync(id);
         return result ? NoContent() : NotFound();
+    }
+
+    // Lấy danh sách công việc cá nhân của user
+    [HttpGet("personal/user/{userId}")]
+    public async Task<IActionResult> GetPersonalTasksByUserId(int userId)
+    {
+        var tasks = await _service.GetPersonalTasksAsync(userId);
+        return Ok(tasks);
     }
 }

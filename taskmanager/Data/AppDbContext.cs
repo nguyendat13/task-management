@@ -17,6 +17,9 @@ namespace taskmanager.Data
         public DbSet<Personal> Personals { get; set; }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<WorkProgress> WorkProgresses { get; set; }
+        public DbSet<GroupItemUser> GroupItemUsers { get; set; }
+        public DbSet<GroupItemTask> GroupItemTasks { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Quan hệ Sender/Receiver rõ ràng

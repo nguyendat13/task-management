@@ -72,17 +72,67 @@ namespace taskmanager.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("TaskId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
+                    b.ToTable("groups");
+                });
+
+            modelBuilder.Entity("taskmanager.Models.GroupItemTask", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("AssignedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
                     b.HasIndex("TaskId");
 
-                    b.ToTable("groups");
+                    b.ToTable("group_item_task");
+                });
+
+            modelBuilder.Entity("taskmanager.Models.GroupItemUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GroupId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsLeader")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("JoinedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("group_item_user");
                 });
 
             modelBuilder.Entity("taskmanager.Models.Message", b =>
@@ -374,13 +424,42 @@ namespace taskmanager.Migrations
                     b.Navigation("Personal");
                 });
 
-            modelBuilder.Entity("taskmanager.Models.Group", b =>
+            modelBuilder.Entity("taskmanager.Models.GroupItemTask", b =>
                 {
+                    b.HasOne("taskmanager.Models.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("taskmanager.Models.TaskItem", "TaskItem")
                         .WithMany()
-                        .HasForeignKey("TaskId");
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
 
                     b.Navigation("TaskItem");
+                });
+
+            modelBuilder.Entity("taskmanager.Models.GroupItemUser", b =>
+                {
+                    b.HasOne("taskmanager.Models.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("taskmanager.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Group");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("taskmanager.Models.Message", b =>
