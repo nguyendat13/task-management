@@ -47,6 +47,22 @@ namespace taskmanager.Services
                 TaskTitles = group.Tasks.Select(t => t.Title).ToList()
             };
         }
+        public async Task<List<GroupDTO>> GetGroupsByUserIdAsync(int userId)
+        {
+            return await _context.GroupItemUsers
+                .Where(giu => giu.UserId == userId)
+                .Include(giu => giu.Group)
+                    .ThenInclude(g => g.Tasks)
+                .Select(giu => new GroupDTO
+                {
+                    Id = giu.Group.Id,
+                    Duty = giu.Group.Duty,
+                    Name = giu.Group.Name,
+                    CreatedAt = giu.Group.CreatedAt,
+                    UpdatedAt = giu.Group.UpdatedAt,
+                    TaskTitles = giu.Group.Tasks.Select(t => t.Title).ToList()
+                }).ToListAsync();
+        }
 
         public async Task<GroupDTO> CreateGroupAsync(GroupCreateDTO groupCreateDto)
         {
@@ -59,6 +75,17 @@ namespace taskmanager.Services
             };
 
             _context.Groups.Add(group);
+            await _context.SaveChangesAsync();
+
+            // ✅ Gán user vào group sau khi tạo
+            var groupItemUser = new GroupItemUser
+            {
+                GroupId = group.Id,
+                UserId = groupCreateDto.UserId,
+                IsLeader = true
+            };
+
+            _context.GroupItemUsers.Add(groupItemUser);
             await _context.SaveChangesAsync();
 
             return new GroupDTO

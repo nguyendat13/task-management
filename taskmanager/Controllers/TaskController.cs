@@ -45,8 +45,12 @@ public class TaskController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, [FromBody] CreateTaskDTO dto)
     {
-        var result = await _service.UpdateTaskAsync(id, dto);
-        return result ? NoContent() : NotFound();
+
+        var success = await _service.UpdateTaskAsync(id, dto);
+        if (!success)
+            return NotFound(new { message = "Không tìm thấy công việc." });
+
+        return Ok(true); // hoặc return Ok(new { success = true });
     }
 
     [HttpDelete("{id}")]

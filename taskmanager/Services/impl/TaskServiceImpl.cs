@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using taskmanager.Data;
+using taskmanager.DTOs.Group;
 using taskmanager.DTOs.Task;
 using taskmanager.Models;
 
@@ -8,7 +9,8 @@ namespace taskmanager.Services
     public class TaskServiceImpl : ITaskService
     {
         private readonly AppDbContext _context;
-
+        private static readonly List<int> PersonalProgressIds = new() { 1, 2, 3, 6, 8 };
+        private static readonly List<int> GroupProgressIds = new() { 1, 2, 3, 4, 5, 6, 7, 8 };
         public TaskServiceImpl(AppDbContext context)
         {
             _context = context;
@@ -59,28 +61,33 @@ namespace taskmanager.Services
                 DueDate = task.DueDate,
                 UserId = task.UserId,
                 GroupId = task.GroupId,
-                WorkProgressId = task.WorkProgressId
+                WorkProgressId = task.WorkProgressId,
+                AllowedProgressIds = task.GroupId == null ? PersonalProgressIds : GroupProgressIds // 👈 THÊM DÒNG NÀY
             };
         }
 
         public async Task<IEnumerable<TaskDTO>> GetTasksByUserIdAsync(int userId)
         {
-            return await _context.Tasks
+            var tasks = await _context.Tasks
                 .Where(t => t.UserId == userId)
-                .Select(t => new TaskDTO
-                {
-                    Id = t.Id,
-                    Title = t.Title,
-                    Description = t.Description,
-                    Detail = t.Detail,
-                    DueDate = t.DueDate,
-                    UserId = t.UserId,
-                    GroupId = t.GroupId,
-                    WorkProgressId = t.WorkProgressId
-                }).ToListAsync();
+                .ToListAsync();
+
+            var result = tasks.Select(t => new TaskDTO
+            {
+                Id = t.Id,
+                Title = t.Title,
+                Description = t.Description,
+                DueDate = t.DueDate,
+                WorkProgressId = t.WorkProgressId,
+                UserId = t.UserId,
+                GroupId = t.GroupId,
+                AllowedProgressIds = t.GroupId == null ? PersonalProgressIds : GroupProgressIds
+            });
+
+            return result;
         }
 
-
+      
         public async Task<TaskDTO> CreateTaskAsync(CreateTaskDTO dto)
         {
             // Nếu có GroupId, kiểm tra xem User có thuộc group đó không

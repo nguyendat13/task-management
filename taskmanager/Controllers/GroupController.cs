@@ -30,6 +30,13 @@ namespace taskmanager.Controllers
             return Ok(group);
         }
 
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetGroupsByUserId(int userId)
+        {
+            var groups = await _groupService.GetGroupsByUserIdAsync(userId);
+            return Ok(groups);
+        }
+
         [HttpPost]
         public async Task<ActionResult<GroupDTO>> Create(GroupCreateDTO groupCreateDto)
         {

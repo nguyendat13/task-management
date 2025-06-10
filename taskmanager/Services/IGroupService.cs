@@ -7,6 +7,7 @@ namespace taskmanager.Services
     {
         Task<List<GroupDTO>> GetAllGroupsAsync();
         Task<GroupDTO?> GetGroupByIdAsync(int id);
+        Task<List<GroupDTO>> GetGroupsByUserIdAsync(int userId);
        Task<GroupDTO> CreateGroupAsync(GroupCreateDTO groupCreateDto);
         Task<bool> UpdateGroupAsync(int id, GroupUpdateDTO groupUpdateDto);
         Task<bool> DeleteGroupAsync(int id);
