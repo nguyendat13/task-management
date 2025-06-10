@@ -44,10 +44,10 @@ const TaskService = {
   updateTask: async (id, taskData) => {
     try {
       const response = await axiosInstance.put(`/Task/${id}`, taskData);
-      return response.data;
+    return response.status === 200 && response.data === true; // ← đảm bảo boolean true
     } catch (error) {
       console.error("Lỗi updateTask:", error.response?.data || error.message);
-      return null;
+    return false;
     }
   },
 

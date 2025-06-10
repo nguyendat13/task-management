@@ -31,12 +31,6 @@ const TaskList = () => {
     fetchData();
   }, [userId]);
 
-  const getProgressStatus = (id) => {
-    const progress = progressList.find((item) => item.id === id);
-    return progress ? progress.status : "Không rõ";
-  };
-
-  // Xóa task nếu tiến độ = 1
   const handleDelete = async (taskId, workProgressId) => {
     if (workProgressId !== 1) {
       alert("Chỉ có thể xóa công việc khi tiến độ là 1 (Mới tạo).");
@@ -54,108 +48,80 @@ const TaskList = () => {
     }
   };
 
-  // Cập nhật tiến độ công việc
-const handleProgressChange = async (taskId, newProgressId) => {
-  try {
-    // Lấy task hiện tại từ API
-    const currentTask = await TaskService.getTaskById(taskId);
-    if (!currentTask) {
-      alert("Không tìm thấy công việc");
-      return;
-    }
+  const getProgressStatus = (id) => {
+    const progress = progressList.find((item) => item.id === id);
+    return progress ? progress.status : "Không rõ";
+  };
 
-    // Tạo object cập nhật, giữ nguyên userId, groupId
-    const updatedTaskData = {
-      ...currentTask,
-      workProgressId: newProgressId,
-    };
+  if (loading)
+    return <p className="text-white text-center mt-10">Đang tải dữ liệu...</p>;
 
-    // Gọi API cập nhật task (giả sử có hàm updateTask)
-    await TaskService.updateTask(updatedTaskData);
-
-    // Cập nhật lại trong state local
-    setTasks(tasks.map(task =>
-      task.id === taskId ? { ...task, workProgressId: newProgressId } : task
-    ));
-
-    alert("Cập nhật tiến độ thành công");
-  } catch (error) {
-    console.error(error);
-    alert("Cập nhật tiến độ thất bại");
-  }
-};
-
-
-  if (loading) return <p className="text-white text-center mt-10">Đang tải dữ liệu...</p>;
   if (!tasks || tasks.length === 0)
     return <p className="text-white text-center mt-10">Không có công việc nào.</p>;
 
   return (
-   <div className="relative min-h-screen">
-      {/* Nền mờ */}
-      <div className="absolute  inset-0 bg-black bg-opacity-40 backdrop-blur-sm z-0"></div>
-
-      {/* Nội dung */}
-      <div className="relative z-10 space-y-6 max-w-4xl mx-auto p-6">
+    <div className="relative min-h-screen  text-white">
+      <div className="relative z-10 max-w-5xl mx-auto py-12 px-6">
         {/* Nút quay lại */}
-        <button
-          onClick={() => navigate("/")}
-          className="mb-4 px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded shadow"
-        >
-          &larr; Quay lại
-        </button>
+        <div className="mb-6">
+          <button
+            onClick={() => navigate("/")}
+            className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded shadow transition"
+          >
+            &larr; Quay lại
+          </button>
+        </div>
 
-        <h2 className="text-2xl text-orange-400 font-bold text-center">
+        <h2 className="text-3xl font-bold text-center text-orange-400 mb-8">
           Danh sách công việc
         </h2>
 
-        {tasks.map((task) => (
-          <div
-            key={task.id}
-            className="bg-gray-900 p-6 rounded-lg shadow-lg text-white hover:shadow-orange-500 transition-shadow"
-          >
-            <div className="flex justify-between items-start">
-              <div>
-                <h3 className="text-2xl font-bold text-orange-400">{task.title}</h3>
+        <div className="grid md:grid-cols-2 gap-6">
+          {tasks.map((task) => (
+            <div
+              key={task.id}
+              className="bg-gray-800 border border-gray-700 rounded-lg p-6 shadow-md hover:shadow-orange-500 transition duration-300"
+            >
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold text-orange-300">{task.title}</h3>
                 <p className="mt-2 text-gray-300">{task.description}</p>
-                <p className="mt-1 text-sm text-gray-400">
-                  Hạn chót:{" "}
+              </div>
+
+              <div className="text-sm space-y-1 text-gray-400">
+                <p>
+                  <span className="text-gray-500">Hạn chót:</span>{" "}
                   {task.dueDate
                     ? new Date(task.dueDate).toLocaleString()
-                    : "Chưa đặt hạn chót"}
+                    : "Chưa đặt"}
                 </p>
-                <p className="mt-1 text-sm text-green-400">
-                  Tiến độ: {getProgressStatus(task.workProgressId)}
+                <p>
+                  <span className="text-gray-500">Tiến độ:</span>{" "}
+                  <span className="text-green-400">
+                    {getProgressStatus(task.workProgressId)}
+                  </span>
                 </p>
               </div>
 
-              <div className="flex flex-col items-end space-y-3">
-                <select
-                  value={task.workProgressId}
-                  onChange={(e) =>
-                    handleProgressChange(task.id, Number(e.target.value))
-                  }
-                  className="bg-gray-800 border border-gray-600 rounded px-3 py-1 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+              <div className="flex justify-end gap-3 mt-5">
+                <button
+                  onClick={() => navigate(`/chi-tiet-cong-viec/${task.id}`)}
+                  className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white shadow"
                 >
-                  {progressList.map((progress) => (
-                    <option key={progress.id} value={progress.id}>
-                      {progress.status}
-                    </option>
-                  ))}
-                </select>
+                  Xem chi tiết
+                </button>
 
                 {task.workProgressId === 1 && (
                   <button
                     onClick={() => handleDelete(task.id, task.workProgressId)}
-                    className="bg-red-600 hover:bg-red-700 text-white px-4 py-1 rounded shadow"
+                    className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white shadow"
                   >
                     Xóa
                   </button>
                 )}
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
