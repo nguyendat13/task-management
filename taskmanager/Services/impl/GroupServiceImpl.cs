@@ -23,6 +23,7 @@ namespace taskmanager.Services
                     Id = g.Id,
                     Duty = g.Duty,
                     Name = g.Name,
+                    GroupCode = g.GroupCode,
                     CreatedAt = g.CreatedAt,
                     UpdatedAt = g.UpdatedAt,
                     TaskTitles = g.Tasks.Select(t => t.Title).ToList()
@@ -42,6 +43,7 @@ namespace taskmanager.Services
                 Id = group.Id,
                 Duty = group.Duty,
                 Name = group.Name,
+                GroupCode=group.GroupCode,
                 CreatedAt = group.CreatedAt,
                 UpdatedAt = group.UpdatedAt,
                 TaskTitles = group.Tasks.Select(t => t.Title).ToList()
@@ -58,6 +60,7 @@ namespace taskmanager.Services
                     Id = giu.Group.Id,
                     Duty = giu.Group.Duty,
                     Name = giu.Group.Name,
+                    GroupCode=giu.Group.GroupCode,
                     CreatedAt = giu.Group.CreatedAt,
                     UpdatedAt = giu.Group.UpdatedAt,
                     TaskTitles = giu.Group.Tasks.Select(t => t.Title).ToList()
@@ -70,6 +73,7 @@ namespace taskmanager.Services
             {
                 Duty = groupCreateDto.Duty,
                 Name = groupCreateDto.Name,
+                GroupCode = GenerateUniqueGroupCode(),
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             };
@@ -93,13 +97,22 @@ namespace taskmanager.Services
                 Id = group.Id,
                 Duty = group.Duty,
                 Name = group.Name,
+                GroupCode = group.GroupCode,
                 CreatedAt = group.CreatedAt,
                 UpdatedAt = group.UpdatedAt,
                 TaskTitles = new List<string>()
             };
         }
 
-
+        private string GenerateUniqueGroupCode()
+        {
+            string code;
+            do
+            {
+                code = Guid.NewGuid().ToString("N").Substring(0, 8).ToUpper();
+            } while (_context.Groups.Any(g => g.GroupCode == code));
+            return code;
+        }
         public async Task<bool> UpdateGroupAsync(int id, GroupUpdateDTO groupUpdateDto)
         {
             var group = await _context.Groups.FindAsync(id);

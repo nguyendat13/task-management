@@ -7,6 +7,9 @@
         public string GroupName { get; set; }
         public int TaskId { get; set; }
         public string TaskTitle { get; set; }
+        public DateTime? DueDate { get; set; }
+        public int? WorkProgressId { get; set; }
+
         public DateTime AssignedAt { get; set; }
     }
 }

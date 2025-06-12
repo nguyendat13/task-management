@@ -14,15 +14,23 @@ namespace taskmanager.Services.impl
             _context = context;
         }
 
-        public async Task<GroupItemUserDTO> JoinGroupAsync(CreateGroupItemUserDTO dto)
+        public async Task<GroupItemUserDTO> JoinGroupAsync(JoinGroupByCodeDTO dto)
         {
-            var exists = await _context.GroupItemUsers
-                .AnyAsync(g => g.GroupId == dto.GroupId && g.UserId == dto.UserId);
-            if (exists) throw new Exception("User already in group");
+            // Tìm nhóm bằng GroupCode
+            var group = await _context.Groups.FirstOrDefaultAsync(g => g.GroupCode == dto.GroupCode);
+            if (group == null)
+                throw new Exception("Không tìm thấy nhóm với mã này.");
 
+            // Kiểm tra xem user đã tham gia chưa
+            var exists = await _context.GroupItemUsers
+                .AnyAsync(g => g.GroupId == group.Id && g.UserId == dto.UserId);
+            if (exists)
+                throw new Exception("Người dùng đã tham gia nhóm này.");
+
+            // Tạo bản ghi mới
             var entry = new GroupItemUser
             {
-                GroupId = dto.GroupId,
+                GroupId = group.Id,
                 UserId = dto.UserId,
                 IsLeader = dto.IsLeader,
                 JoinedAt = DateTime.UtcNow
@@ -31,17 +39,17 @@ namespace taskmanager.Services.impl
             _context.GroupItemUsers.Add(entry);
             await _context.SaveChangesAsync();
 
-            var group = await _context.Groups.FindAsync(dto.GroupId);
+            // Lấy thông tin người dùng
             var user = await _context.Users.FindAsync(dto.UserId);
 
             return new GroupItemUserDTO
             {
                 Id = entry.Id,
-                GroupId = dto.GroupId,
-                GroupName = group?.Name ?? "",
+                GroupId = group.Id,
+                GroupName = group.Name,
                 UserId = dto.UserId,
                 UserName = user?.Name ?? "",
-                IsLeader = dto.IsLeader,
+                IsLeader = entry.IsLeader,
                 JoinedAt = entry.JoinedAt
             };
         }

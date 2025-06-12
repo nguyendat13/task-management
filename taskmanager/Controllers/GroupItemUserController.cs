@@ -16,7 +16,7 @@ namespace taskmanager.Controllers
         }
 
         [HttpPost("join")]
-        public async Task<IActionResult> Join([FromBody] CreateGroupItemUserDTO dto)
+        public async Task<IActionResult> JoinGroup([FromBody] JoinGroupByCodeDTO dto)
         {
             try
             {
@@ -28,6 +28,7 @@ namespace taskmanager.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
 
         [HttpDelete("leave")]
         public async Task<IActionResult> Leave([FromQuery] int groupId, [FromQuery] int userId)

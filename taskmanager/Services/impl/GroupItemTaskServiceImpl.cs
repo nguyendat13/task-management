@@ -45,6 +45,8 @@ public class GroupItemTaskServiceImpl : IGroupItemTaskService
                 GroupName = git.Group.Name,
                 TaskId = git.TaskId,
                 TaskTitle = git.TaskItem.Title,
+                DueDate=git.TaskItem.DueDate,
+                WorkProgressId=git.TaskItem.WorkProgressId,
                 AssignedAt = git.AssignedAt
             }).ToListAsync();
     }

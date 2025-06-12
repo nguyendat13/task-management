@@ -12,6 +12,7 @@ namespace taskmanager.Models
         public string? Duty { get; set; }
 
         public string? Name { get; set; }
+        public string GroupCode { get; set; } = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

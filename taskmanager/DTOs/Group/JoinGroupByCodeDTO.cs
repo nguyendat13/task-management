@@ -1,9 +1,10 @@
 ﻿namespace taskmanager.DTOs.Group
 {
-    public class CreateGroupItemUserDTO
+    public class JoinGroupByCodeDTO
     {
-        public int GroupId { get; set; }
+        public string GroupCode { get; set; } = string.Empty;
         public int UserId { get; set; }
         public bool IsLeader { get; set; } = false;
+
     }
 }

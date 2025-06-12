@@ -60,6 +60,8 @@ public class GoogleLoginController : ControllerBase
     new Claim("userId", user.Id.ToString()),
     new Claim("roleId", user.RoleId?.ToString() ?? "3"),
     new Claim("phone", user.Phone ?? ""),
+     new Claim("name", user.Name ?? ""),
+
     new Claim("address", user.Address ?? ""),
     new Claim("gender", user.Gender ?? "")
         };
