@@ -10,6 +10,10 @@ import AddTask from "../components/frontend/task/AddTask";
 import TaskDetail from "../components/frontend/task/TaskDetail";
 import AddGroup from "../components/frontend/group/AddGroup";
 import GroupList from "../components/frontend/group/GroupList";
+import JoinGroup from "../components/frontend/group/JoinGroup";
+import GroupDetail from "../components/frontend/group/GroupDetail";
+import GroupMembers from "../components/frontend/group/details/GroupMembers";
+import GroupTasks from "../components/frontend/group/details/GroupTasks";
 
 const RouterSite =[
     {path: "/",element: <Home />,},
@@ -26,6 +30,10 @@ const RouterSite =[
   //group
     { path: "/tao-nhom-moi", element: <PrivateRoute element={<AddGroup/>} /> },
     { path: "/danh-sach-nhom", element: <PrivateRoute element={<GroupList/>} /> },
+    { path: "/tham-gia-nhom", element: <PrivateRoute element={<JoinGroup/>} /> },
+    { path: "/nhom/:id", element: <PrivateRoute element={<GroupDetail/>} /> },
+    { path: "/nhom/:id/thanh-vien", element: <PrivateRoute element={<GroupMembers/>} /> },
+    { path: "/nhom/:id/cong-viec", element: <PrivateRoute element={<GroupTasks/>} /> },
 
 ]
 
