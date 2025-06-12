@@ -1,3 +1,43 @@
+# 📝 Task Management Web App
+
+A web application for managing personal or team tasks. Users can create groups, assign tasks, and track progress collaboratively. Built with **React.js + TailwindCSS** for the frontend and **ASP.NET Core Web API + Entity Framework Core** for the backend, using **MySQL** as the database.
+
+---
+
+## 🚀 Key Features
+
+- 🔐 User registration, login, and role-based authorization
+- 👥 Create or join groups via group code
+- ✅ Create and assign tasks to group members
+- 📅 Track task status (Pending, In Progress, Done)
+- 🧑‍🤝‍🧑 Manage group members (Leader, Member)
+- 📊 Monitor task progress with status updates
+- 🔄 Seamless communication between frontend and backend via RESTful APIs
+
+---
+
+## 🛠️ Technologies Used
+
+### 📌 Frontend
+
+- [React.js](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- React Router, Axios
+
+### 📌 Backend
+
+- [ASP.NET Core Web API](https://dotnet.microsoft.com/en-us/apps/aspnet)
+- [Entity Framework Core (EF Core)](https://learn.microsoft.com/en-us/ef/core/)
+- JWT Authentication
+- RESTful API design
+
+### 📌 Database
+
+- [MySQL](https://www.mysql.com/)
+
+---
+
+
 # Getting Started with ASP.NET Core
 
 This project was built using **ASP.NET Core**.
