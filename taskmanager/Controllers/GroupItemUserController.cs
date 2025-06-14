@@ -43,6 +43,20 @@ namespace taskmanager.Controllers
             var result = await _service.GetUsersByGroupIdAsync(groupId);
             return Ok(result);
         }
+        [HttpPost("add-by-email-or-username")]
+        public async Task<IActionResult> AddMemberByEmailOrUsername([FromBody] AddMemberToGroupDTO dto)
+        {
+            try
+            {
+                var result = await _service.AddMemberByEmailOrUsernameAsync(dto);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
     }
 
 }

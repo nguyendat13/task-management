@@ -82,6 +82,50 @@ namespace taskmanager.Services.impl
                     JoinedAt = g.JoinedAt
                 }).ToListAsync();
         }
+        public async Task<GroupItemUserDTO> AddMemberByEmailOrUsernameAsync(AddMemberToGroupDTO dto)
+        {
+            var group = await _context.Groups.FindAsync(dto.GroupId);
+            if (group == null)
+                throw new Exception("Không tìm thấy nhóm.");
+
+            // Tìm user theo email hoặc username
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == dto.EmailOrUsername || u.Username == dto.EmailOrUsername);
+
+            if (user == null)
+                throw new Exception("Không tìm thấy người dùng.");
+
+            // Kiểm tra xem user đã ở trong nhóm chưa
+            bool isInGroup = await _context.GroupItemUsers
+                .AnyAsync(g => g.GroupId == dto.GroupId && g.UserId == user.Id);
+
+            if (isInGroup)
+                throw new Exception("Người dùng đã ở trong nhóm.");
+
+            // Tạo bản ghi
+            var entry = new GroupItemUser
+            {
+                GroupId = group.Id,
+                UserId = user.Id,
+                IsLeader = dto.IsLeader,
+                JoinedAt = DateTime.UtcNow
+            };
+
+            _context.GroupItemUsers.Add(entry);
+            await _context.SaveChangesAsync();
+
+            return new GroupItemUserDTO
+            {
+                Id = entry.Id,
+                GroupId = group.Id,
+                GroupName = group.Name,
+                UserId = user.Id,
+                UserName = user.Username,
+                IsLeader = entry.IsLeader,
+                JoinedAt = entry.JoinedAt
+            };
+        }
+
     }
 
 }
