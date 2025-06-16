@@ -107,7 +107,7 @@ namespace taskmanager.Services.impl
             {
                 GroupId = group.Id,
                 UserId = user.Id,
-                IsLeader = dto.IsLeader,
+                IsLeader = false,
                 JoinedAt = DateTime.UtcNow
             };
 
@@ -121,9 +121,39 @@ namespace taskmanager.Services.impl
                 GroupName = group.Name,
                 UserId = user.Id,
                 UserName = user.Username,
-                IsLeader = entry.IsLeader,
+                IsLeader = false,
                 JoinedAt = entry.JoinedAt
             };
+        }
+
+
+        public async Task<bool> RemoveMemberAsync(int groupId, int userId)
+        {
+            var item = await _context.GroupItemUsers
+                .FirstOrDefaultAsync(g => g.GroupId == groupId && g.UserId == userId);
+            if (item == null) return false;
+
+            _context.GroupItemUsers.Remove(item);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task AssignLeaderAsync(int groupId, int newLeaderId)
+        {
+            var members = await _context.GroupItemUsers
+                .Where(g => g.GroupId == groupId)
+                .ToListAsync();
+
+            var newLeader = members.FirstOrDefault(m => m.UserId == newLeaderId);
+            if (newLeader == null)
+                throw new Exception("Không tìm thấy thành viên để ủy quyền.");
+
+            foreach (var member in members)
+            {
+                member.IsLeader = member.UserId == newLeaderId;
+            }
+
+            await _context.SaveChangesAsync();
         }
 
     }

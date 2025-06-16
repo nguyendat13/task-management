@@ -57,6 +57,28 @@ namespace taskmanager.Controllers
             }
         }
 
+
+        [HttpDelete("{groupId}/remove/{userId}")]
+        public async Task<IActionResult> RemoveMember(int groupId, int userId)
+        {
+            var success = await _service.RemoveMemberAsync(groupId, userId);
+            if (!success) return NotFound("Không tìm thấy thành viên trong nhóm.");
+            return Ok(new { message = "Xóa thành viên thành công" });
+        }
+
+        [HttpPost("{groupId}/assign-leader")]
+        public async Task<IActionResult> AssignLeader(int groupId, [FromBody] AssignLeaderDTO dto)
+        {
+            try
+            {
+                await _service.AssignLeaderAsync(groupId, dto.NewLeaderId);
+                return Ok(new { message = "Đã ủy quyền nhóm trưởng." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 
 }
