@@ -14,6 +14,7 @@ import JoinGroup from "../components/frontend/group/JoinGroup";
 import GroupDetail from "../components/frontend/group/GroupDetail";
 import GroupMembers from "../components/frontend/group/details/GroupMembers";
 import GroupTasks from "../components/frontend/group/details/GroupTasks";
+import AddGroupTask from "../components/frontend/group/AddGroupTask";
 
 const RouterSite =[
     {path: "/",element: <Home />,},
@@ -34,6 +35,9 @@ const RouterSite =[
     { path: "/nhom/:id", element: <PrivateRoute element={<GroupDetail/>} /> },
     { path: "/nhom/:id/thanh-vien", element: <PrivateRoute element={<GroupMembers/>} /> },
     { path: "/nhom/:id/cong-viec", element: <PrivateRoute element={<GroupTasks/>} /> },
+
+    { path: "/nhom/:groupId/them-cong-viec", element: <PrivateRoute element={<AddGroupTask/>} /> },
+
 
 ]
 

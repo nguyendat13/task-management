@@ -35,6 +35,47 @@ const GroupItemUserService = {
       return false;
     }
   },
+  // Ủy quyền nhóm trưởng
+  assignLeader: async (groupId, newLeaderId) => {
+    try {
+      const res = await axiosInstance.post(
+        `/GroupItemUser/${groupId}/assign-leader`,
+        { newLeaderId }
+      );
+      return res.data;
+    } catch (error) {
+      console.error("Lỗi assignLeader:", error.response?.data || error.message);
+      throw error;
+    }
+  },
+
+  // Xoá thành viên
+  removeMember: async (groupId, userId) => {
+    try {
+      const res = await axiosInstance.delete(
+        `/GroupItemUser/${groupId}/remove/${userId}`
+      );
+      return res.status === 200;
+    } catch (error) {
+      console.error("Lỗi removeMember:", error.response?.data || error.message);
+      return false;
+    }
+  },
+
+  // ✅ Thêm thành viên bằng username hoặc email
+  addMemberByEmailOrUsername: async (groupId, identifier) => {
+    try {
+      const res = await axiosInstance.post(`/GroupItemUser/add-by-email-or-username`, {
+        groupId,
+        emailOrUsername: identifier,
+      });
+      return res.data;
+    } catch (error) {
+      console.error("Lỗi addMemberByEmailOrUsername:", error.response?.data || error.message);
+      throw error;
+    }
+  },
+
 };
 
 export default GroupItemUserService;
