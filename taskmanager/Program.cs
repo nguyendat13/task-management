@@ -1,14 +1,15 @@
-using Microsoft.EntityFrameworkCore;
-using taskmanager.Data;
-using taskmanager.Services.impl;
-using taskmanager.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
-using taskmanager.Models;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using System.Text;
+using taskmanager.Data;
+using taskmanager.Models;
+using taskmanager.Services;
+using taskmanager.Services.impl;
+using taskmanager.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,7 @@ builder.Services.AddScoped<IWorkProgressService, WorkProgressServiceImpl>();
 builder.Services.AddScoped<IGroupService, GroupServiceImpl>();
 builder.Services.AddScoped<IGroupItemTaskService, GroupItemTaskServiceImpl>();
 builder.Services.AddScoped<IGroupItemUserService, GroupItemUserServiceImpl>();
+builder.Services.AddScoped<INotificationService, NotificationServiceImpl>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 

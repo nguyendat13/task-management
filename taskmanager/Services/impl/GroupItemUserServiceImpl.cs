@@ -8,10 +8,13 @@ namespace taskmanager.Services.impl
     public class GroupItemUserServiceImpl : IGroupItemUserService
     {
         private readonly AppDbContext _context;
+        private readonly INotificationService _notificationService;
 
-        public GroupItemUserServiceImpl(AppDbContext context)
+        public GroupItemUserServiceImpl(AppDbContext context, INotificationService notificationService)
         {
             _context = context;
+            _notificationService = notificationService;
+
         }
 
         public async Task<GroupItemUserDTO> JoinGroupAsync(JoinGroupByCodeDTO dto)
@@ -111,8 +114,11 @@ namespace taskmanager.Services.impl
                 JoinedAt = DateTime.UtcNow
             };
 
-            _context.GroupItemUsers.Add(entry);
-            await _context.SaveChangesAsync();
+            //_context.GroupItemUsers.Add(entry);
+            //await _context.SaveChangesAsync();
+
+            // ✅ Gửi thông báo mời vào nhóm
+            await _notificationService.SendGroupInviteNotificationAsync(user.Id, group.Id);
 
             return new GroupItemUserDTO
             {

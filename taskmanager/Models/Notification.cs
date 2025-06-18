@@ -16,6 +16,8 @@ namespace taskmanager.Models
         [ForeignKey("TaskItem")]
         public int? TaskId { get; set; }
         public TaskItem? TaskItem { get; set; }
+        public int? GroupId { get; set; }
+        public Group? Group { get; set; }
 
         [ForeignKey("Message")]
         public int? MessageId { get; set; }
@@ -28,5 +30,8 @@ namespace taskmanager.Models
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public NotificationType Type { get; set; } = NotificationType.Other;
+        public NotificationStatus Status { get; set; } = NotificationStatus.None;
+
     }
 }

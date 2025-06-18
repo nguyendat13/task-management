@@ -12,6 +12,7 @@ namespace taskmanager.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+
         public DbSet<Group> Groups { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Personal> Personals { get; set; }

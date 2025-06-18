@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using taskmanager.Data;
 
@@ -11,9 +12,11 @@ using taskmanager.Data;
 namespace taskmanager.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250618164119_AddNotificationEnums")]
+    partial class AddNotificationEnums
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -191,9 +194,6 @@ namespace taskmanager.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -220,8 +220,6 @@ namespace taskmanager.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
 
                     b.HasIndex("MessageId");
 
@@ -504,10 +502,6 @@ namespace taskmanager.Migrations
 
             modelBuilder.Entity("taskmanager.Models.Notification", b =>
                 {
-                    b.HasOne("taskmanager.Models.Group", "Group")
-                        .WithMany()
-                        .HasForeignKey("GroupId");
-
                     b.HasOne("taskmanager.Models.Message", "RelatedMessage")
                         .WithMany("Notifications")
                         .HasForeignKey("MessageId");
@@ -519,8 +513,6 @@ namespace taskmanager.Migrations
                     b.HasOne("taskmanager.Models.User", "User")
                         .WithMany("Notifications")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("Group");
 
                     b.Navigation("RelatedMessage");
 
