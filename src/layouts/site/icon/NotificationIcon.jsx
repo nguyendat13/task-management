@@ -88,23 +88,23 @@ const NotificationIcon = ({ userId }) => {
                 <p className="text-sm mb-1">{n.message}</p>
 
                 {/* Phân biệt bằng map enum */}
-                {NotificationTypeMap[n.type] === "InviteToGroup" &&
-                 NotificationStatusMap[n.status] === "Pending" && (
-                  <div className="flex gap-2 text-sm">
-                    <button
-                      onClick={() => handleAccept(n.id)}
-                      className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-                    >
-                      Chấp nhận
-                    </button>
-                    <button
-                      onClick={() => handleReject(n.id)}
-                      className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                    >
-                      Từ chối
-                    </button>
-                  </div>
-                )}
+              {NotificationStatusMap[n.status] === "Pending" &&
+  (NotificationTypeMap[n.type] === "InviteToGroup" || NotificationTypeMap[n.type] === "Message") && (
+    <div className="flex gap-2 text-sm mt-1">
+      <button
+        onClick={() => handleAccept(n.id)}
+        className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+      >
+        Chấp nhận
+      </button>
+      <button
+        onClick={() => handleReject(n.id)}
+        className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+      >
+        Từ chối
+      </button>
+    </div>
+)}
 
                 {NotificationStatusMap[n.status] !== "Pending" && !n.wasRead && (
                   <button

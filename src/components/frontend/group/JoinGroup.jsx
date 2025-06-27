@@ -16,13 +16,14 @@ const JoinGroup = () => {
     }
 
     try {
-      await GroupItemUserService.joinGroupByCode(groupCode, userId);
-      setMessage("Tham gia nhóm thành công!");
-      setTimeout(() => navigate("/danh-sach-nhom"), 1500); // chuyển sau 1.5s
-    } catch (error) {
-      console.error("Lỗi tham gia nhóm:", error);
-      setMessage("Không tìm thấy mã nhóm hoặc bạn đã tham gia nhóm này.");
-    }
+  await GroupItemUserService.joinGroupByCode(groupCode, userId);
+  setMessage("Yêu cầu tham gia đã được gửi. Vui lòng chờ duyệt.");
+  setGroupCode("");
+} catch (error) {
+  console.error("Lỗi tham gia nhóm:", error);
+  setMessage("Không tìm thấy mã nhóm hoặc bạn đã gửi yêu cầu trước đó.");
+}
+
   };
 
   return (
