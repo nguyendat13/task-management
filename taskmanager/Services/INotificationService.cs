@@ -10,10 +10,10 @@ namespace taskmanager.Services
         Task SendGroupInviteNotificationAsync(int userId, int groupId);
         Task<List<NotificationDTO>> GetUserNotificationsAsync(int userId);
         Task MarkAsReadAsync(int notificationId);
-        Task<GroupItemUserDTO> AcceptGroupInvitationAsync(int notificationId);
+        Task<GroupItemUserDTO?> AcceptNotificationAsync(int notificationId);
 
-        Task RejectGroupInvitationAsync(int notificationId);
-
-
+        Task RejectNotificationAsync(int notificationId);
+        Task SendNotificationAsync(Notification notification);
+        Task SendJoinGroupRequestNotificationAsync(int leaderUserId, int groupId, int requestUserId);
     }
 }

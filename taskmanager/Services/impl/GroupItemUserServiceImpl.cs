@@ -19,42 +19,35 @@ namespace taskmanager.Services.impl
 
         public async Task<GroupItemUserDTO> JoinGroupAsync(JoinGroupByCodeDTO dto)
         {
-            // Tìm nhóm bằng GroupCode
             var group = await _context.Groups.FirstOrDefaultAsync(g => g.GroupCode == dto.GroupCode);
-            if (group == null)
-                throw new Exception("Không tìm thấy nhóm với mã này.");
+            if (group == null) throw new Exception("Không tìm thấy nhóm.");
 
-            // Kiểm tra xem user đã tham gia chưa
-            var exists = await _context.GroupItemUsers
-                .AnyAsync(g => g.GroupId == group.Id && g.UserId == dto.UserId);
-            if (exists)
-                throw new Exception("Người dùng đã tham gia nhóm này.");
+            var alreadyRequested = await _context.Notifications.AnyAsync(n =>
+                n.UserId == dto.UserId &&
+                n.GroupId == group.Id &&
+                n.Type == NotificationType.InviteToGroup &&
+                n.Status == NotificationStatus.Pending);
 
-            // Tạo bản ghi mới
-            var entry = new GroupItemUser
+            if (alreadyRequested)
+                throw new Exception("Bạn đã gửi yêu cầu tham gia nhóm này.");
+
+            // Gửi yêu cầu đến trưởng nhóm
+            var leader = await _context.GroupItemUsers
+                .Where(g => g.GroupId == group.Id && g.IsLeader)
+                .Select(g => g.UserId)
+                .FirstOrDefaultAsync();
+
+            if (leader != null)
             {
-                GroupId = group.Id,
-                UserId = dto.UserId,
-                IsLeader = dto.IsLeader,
-                JoinedAt = DateTime.UtcNow
-            };
+                await _notificationService.SendJoinGroupRequestNotificationAsync(
+                    leaderUserId: leader,
+                    groupId: group.Id,
+                    requestUserId: dto.UserId
+                );
+            }
 
-            _context.GroupItemUsers.Add(entry);
-            await _context.SaveChangesAsync();
 
-            // Lấy thông tin người dùng
-            var user = await _context.Users.FindAsync(dto.UserId);
-
-            return new GroupItemUserDTO
-            {
-                Id = entry.Id,
-                GroupId = group.Id,
-                GroupName = group.Name,
-                UserId = dto.UserId,
-                UserName = user?.Name ?? "",
-                IsLeader = entry.IsLeader,
-                JoinedAt = entry.JoinedAt
-            };
+            return null; // Không trả về user vì chưa join
         }
 
         public async Task<bool> LeaveGroupAsync(int groupId, int userId)

@@ -24,12 +24,12 @@ namespace taskmanager.Controllers
 
         // POST: api/Notification/{notificationId}/accept
         [HttpPost("{notificationId}/accept")]
-        public async Task<ActionResult<GroupItemUserDTO>> AcceptInvitation(int notificationId)
+        public async Task<ActionResult<GroupItemUserDTO>> AcceptNotification(int notificationId)
         {
             try
             {
-                var result = await _notificationService.AcceptGroupInvitationAsync(notificationId);
-                return Ok(result); // Có thể null nếu người dùng đã là thành viên
+                var result = await _notificationService.AcceptNotificationAsync(notificationId);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -37,14 +37,15 @@ namespace taskmanager.Controllers
             }
         }
 
+
         // POST: api/Notification/{notificationId}/reject
         [HttpPost("{notificationId}/reject")]
-        public async Task<IActionResult> RejectInvitation(int notificationId)
+        public async Task<IActionResult> RejectNotification(int notificationId)
         {
             try
             {
-                await _notificationService.RejectGroupInvitationAsync(notificationId);
-                return Ok(new { message = "Đã từ chối lời mời." });
+                await _notificationService.RejectNotificationAsync(notificationId);
+                return Ok(new { message = "Đã từ chối thông báo." });
             }
             catch (Exception ex)
             {

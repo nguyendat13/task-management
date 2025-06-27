@@ -42,6 +42,13 @@ namespace taskmanager.Data
                 .WithMany(g => g.Tasks)
                 .HasForeignKey(t => t.GroupId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Notification>()
+    .HasOne(n => n.RequestUser)
+    .WithMany(u => u.SentRequests)
+    .HasForeignKey(n => n.RequestUserId)
+    .OnDelete(DeleteBehavior.Restrict); // tránh lỗi khi xóa user gửi request
+
         }
 
     }

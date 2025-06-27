@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using taskmanager.Data;
 
@@ -11,9 +12,11 @@ using taskmanager.Data;
 namespace taskmanager.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250621161217_UpdateDB")]
+    partial class UpdateDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -201,9 +204,6 @@ namespace taskmanager.Migrations
                     b.Property<int?>("MessageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RequestUserId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -227,8 +227,6 @@ namespace taskmanager.Migrations
                     b.HasIndex("GroupId");
 
                     b.HasIndex("MessageId");
-
-                    b.HasIndex("RequestUserId");
 
                     b.HasIndex("TaskId");
 
@@ -517,11 +515,6 @@ namespace taskmanager.Migrations
                         .WithMany("Notifications")
                         .HasForeignKey("MessageId");
 
-                    b.HasOne("taskmanager.Models.User", "RequestUser")
-                        .WithMany("SentRequests")
-                        .HasForeignKey("RequestUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("taskmanager.Models.TaskItem", "TaskItem")
                         .WithMany("Notifications")
                         .HasForeignKey("TaskId");
@@ -533,8 +526,6 @@ namespace taskmanager.Migrations
                     b.Navigation("Group");
 
                     b.Navigation("RelatedMessage");
-
-                    b.Navigation("RequestUser");
 
                     b.Navigation("TaskItem");
 
@@ -630,8 +621,6 @@ namespace taskmanager.Migrations
                     b.Navigation("ReceivedMessages");
 
                     b.Navigation("SentMessages");
-
-                    b.Navigation("SentRequests");
 
                     b.Navigation("Setting");
 

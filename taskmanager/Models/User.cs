@@ -35,6 +35,7 @@ namespace taskmanager.Models
         public int? RoleId { get; set; }
 
         public Role? Role { get; set; }
+        public ICollection<Notification> SentRequests { get; set; }  // user là người gửi yêu cầu
 
         public ICollection<TaskItem> Tasks { get; set; }
         public ICollection<Message> SentMessages { get; set; }

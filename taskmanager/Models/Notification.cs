@@ -27,6 +27,8 @@ namespace taskmanager.Models
         public string Message { get; set; }
 
         public bool WasRead { get; set; } = false;
+        public int? RequestUserId { get; set; }
+        public User? RequestUser { get; set; }
 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

@@ -17,6 +17,6 @@ namespace taskmanager.DTOs.Notifications
         public DateTime UpdatedAt { get; set; }
         public NotificationType Type { get; set; }
         public NotificationStatus Status { get; set; }
-
+        public int? RequestUserId { get; set; }
     }
 }
