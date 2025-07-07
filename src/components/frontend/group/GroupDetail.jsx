@@ -5,6 +5,7 @@ import GroupItemTaskService from "../../../services/GroupItemTaskService";
 import WorkProgressService from "../../../services/WorkProgressService";
 import GroupService from "../../../services/GroupService";
 import { getUserIdFromLocalStorage } from "../../../services/utils/auth";
+import TaskService from "../../../services/TaskService";
 
 const GroupDetail = () => {
   const { id: groupId } = useParams();
@@ -51,6 +52,27 @@ const GroupDetail = () => {
   const getProgressStatus = (id) => {
     return progressList.find((p) => p.id === id)?.status || "Không rõ";
   };
+
+
+const handleViewDetail = async (taskId) => {
+  try {
+    const task = await TaskService.getTaskById(taskId);
+    if (!task) {
+      alert("Không tìm thấy công việc này.");
+      return;
+    }
+
+    // Điều hướng sang trang chi tiết nếu tìm thấy
+    navigate(`/nhom/${groupId}/cong-viec/${taskId}`, {
+      state: {
+        progressList, // Truyền sẵn để tiết kiệm 1 lần gọi API
+      },
+    });
+  } catch (error) {
+    console.error("Lỗi khi xem chi tiết:", error);
+    alert("Đã xảy ra lỗi khi tải chi tiết công việc.");
+  }
+};
 
   const handleDeleteTask = async (taskId) => {
     if (window.confirm("Bạn có chắc muốn xoá công việc này?")) {
@@ -250,16 +272,25 @@ const GroupDetail = () => {
                       </span>
                     </p>
                   </div>
+                 <div className="flex justify-end mt-4 space-x-2">
+                 <button
+                  onClick={() => handleViewDetail(task.taskId)}
+                  className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded text-white shadow"
+                >
+                  Xem chi tiết
+                </button>
+
+
                   {isLeader && (
-                    <div className="flex justify-end mt-4">
-                      <button
-                        onClick={() => handleDeleteTask(task.id)}
-                        className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white shadow"
-                      >
-                        Xóa
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => handleDeleteTask(task.id)}
+                      className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white shadow"
+                    >
+                      Xóa
+                    </button>
                   )}
+                </div>
+
                 </div>
               ))}
             </div>

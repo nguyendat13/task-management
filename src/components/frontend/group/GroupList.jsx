@@ -1,36 +1,69 @@
 import React, { useEffect, useState } from "react";
 import GroupService from "../../../services/GroupService";
+import GroupItemUserService from "../../../services/GroupItemUserService";
 import { getUserIdFromLocalStorage } from "../../../services/utils/auth";
 import { useNavigate } from "react-router-dom";
 
 const GroupList = () => {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
-  const userId = getUserIdFromLocalStorage();
   const navigate = useNavigate();
+
+  const userId = parseInt(getUserIdFromLocalStorage(), 10); // ép kiểu number 1 lần duy nhất
 
   useEffect(() => {
     const fetchGroups = async () => {
       if (!userId) return;
+
       try {
-        const data = await GroupService.getGroupsByUserId(userId);
-        setGroups(data || []);
+        const groupsData = await GroupService.getGroupsByUserId(userId);
+
+        const enrichedGroups = await Promise.all(
+          (groupsData || []).map(async (group) => {
+            const members = await GroupItemUserService.getUsersByGroupId(group.id);
+
+            const currentUser = members?.find(
+              (m) => Number(m.userId) === userId
+            );
+
+            const isLeader = currentUser?.isLeader || false;
+
+            return {
+              ...group,
+              isLeader,
+            };
+          })
+        );
+
+        setGroups(enrichedGroups);
       } catch (error) {
-        console.error("Lỗi khi tải nhóm:", error);
+        console.error("Lỗi khi tải danh sách nhóm:", error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchGroups();
   }, [userId]);
- const handleDeleteGroup = async (groupId) => {
+
+  const handleDeleteGroup = async (groupId) => {
+    const group = groups.find((g) => g.id === groupId);
+    if (!group?.isLeader) {
+      alert("Chỉ trưởng nhóm mới có quyền xóa nhóm này.");
+      return;
+    }
+
     const confirm = window.confirm("Bạn có chắc muốn xóa nhóm này?");
     if (!confirm) return;
 
     try {
-      await GroupService.deleteGroup(groupId);
-      setGroups(groups.filter((g) => g.id !== groupId));
-      alert("Xóa nhóm thành công.");
+      const success = await GroupService.deleteGroup(groupId, userId);
+      if (success) {
+        setGroups(groups.filter((g) => g.id !== groupId));
+        alert("Xóa nhóm thành công.");
+      } else {
+        alert("Xóa nhóm thất bại hoặc bạn không có quyền.");
+      }
     } catch (error) {
       console.error("Lỗi khi xóa nhóm:", error);
       alert("Xóa nhóm thất bại.");

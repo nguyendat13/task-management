@@ -49,15 +49,19 @@ const GroupService = {
     }
   },
 
-  deleteGroup: async (id) => {
-    try {
-      const response = await axiosInstance.delete(`/Group/${id}`);
-      return response.status === 204;
-    } catch (error) {
-      console.error("Lỗi deleteGroup:", error.response?.data || error.message);
-      return false;
-    }
+deleteGroup: async (id, userId) => {
+  try {
+    await axiosInstance.delete(`/Group/${id}`, {
+      data: { userId },
+    });
+    return true; // Xóa thành công thì return true luôn
+  } catch (error) {
+    console.error("Lỗi deleteGroup:", error.response?.data || error.message);
+    return false;
   }
+}
+
+
 };
 
 export default GroupService;

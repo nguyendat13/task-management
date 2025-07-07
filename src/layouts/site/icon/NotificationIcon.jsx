@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import NotificationService from '../../../services/NotificationService';
+import { useNavigate } from 'react-router-dom';
 
-// 👉 Enum map để chuyển số → tên
 const NotificationTypeMap = {
   0: "InviteToGroup",
   1: "TaskAssigned",
@@ -22,6 +22,7 @@ const NotificationIcon = ({ userId }) => {
   const [count, setCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [showList, setShowList] = useState(false);
+  const navigate = useNavigate();
 
   const fetchNotifications = async () => {
     try {
@@ -30,30 +31,52 @@ const NotificationIcon = ({ userId }) => {
         setNotifications(result);
         const unreadCount = result.filter(n => !n.wasRead).length;
         setCount(unreadCount);
-      } else {
-        setNotifications([]);
-        setCount(0);
       }
     } catch (error) {
       console.error("Lỗi khi tải thông báo:", error);
-      setNotifications([]);
-      setCount(0);
     }
   };
 
-  const handleAccept = async (notificationId) => {
+  const handleAccept = async (e, notificationId) => {
+    e.stopPropagation();
     await NotificationService.acceptInvite(notificationId);
     fetchNotifications();
   };
 
-  const handleReject = async (notificationId) => {
+  const handleReject = async (e, notificationId) => {
+    e.stopPropagation();
     await NotificationService.rejectInvite(notificationId);
     fetchNotifications();
   };
 
-  const handleMarkAsRead = async (notificationId) => {
+  const handleMarkAsRead = async (e, notificationId) => {
+    e.stopPropagation();
     await NotificationService.markAsRead(notificationId);
     fetchNotifications();
+  };
+
+  const handleClickNotification = async (n) => {
+    if (!n.wasRead) {
+      await NotificationService.markAsRead(n.id);
+    }
+
+    const type = NotificationTypeMap[n.type];
+    setShowList(false); // Ẩn danh sách sau khi click
+
+    switch (type) {
+      case "InviteToGroup":
+        navigate("/danh-sach-nhom");
+        break;
+      case "TaskAssigned":
+        if (n.taskId)
+          navigate(`/cong-viec/${n.taskId}`);
+        break;
+      case "Message":
+        navigate("/danh-sach-nhom");
+        break;
+      default:
+        navigate("/");
+    }
   };
 
   useEffect(() => {
@@ -81,34 +104,36 @@ const NotificationIcon = ({ userId }) => {
             notifications.map((n) => (
               <div
                 key={n.id}
-                className={`p-3 border-b hover:bg-gray-100 ${
+                onClick={() => handleClickNotification(n)}
+                className={`p-3 border-b hover:bg-gray-100 cursor-pointer ${
                   !n.wasRead ? "bg-gray-50" : ""
                 }`}
               >
                 <p className="text-sm mb-1">{n.message}</p>
 
-                {/* Phân biệt bằng map enum */}
-              {NotificationStatusMap[n.status] === "Pending" &&
-  (NotificationTypeMap[n.type] === "InviteToGroup" || NotificationTypeMap[n.type] === "Message") && (
-    <div className="flex gap-2 text-sm mt-1">
-      <button
-        onClick={() => handleAccept(n.id)}
-        className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
-      >
-        Chấp nhận
-      </button>
-      <button
-        onClick={() => handleReject(n.id)}
-        className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-      >
-        Từ chối
-      </button>
-    </div>
-)}
+                {/* Nút hành động riêng biệt không gây điều hướng */}
+                {NotificationStatusMap[n.status] === "Pending" &&
+                  (NotificationTypeMap[n.type] === "InviteToGroup" ||
+                   NotificationTypeMap[n.type] === "Message") && (
+                  <div className="flex gap-2 text-sm mt-1">
+                    <button
+                      onClick={(e) => handleAccept(e, n.id)}
+                      className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                    >
+                      Chấp nhận
+                    </button>
+                    <button
+                      onClick={(e) => handleReject(e, n.id)}
+                      className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+                    >
+                      Từ chối
+                    </button>
+                  </div>
+                )}
 
                 {NotificationStatusMap[n.status] !== "Pending" && !n.wasRead && (
                   <button
-                    onClick={() => handleMarkAsRead(n.id)}
+                    onClick={(e) => handleMarkAsRead(e, n.id)}
                     className="text-xs text-blue-600 hover:underline mt-1"
                   >
                     Đánh dấu đã đọc
