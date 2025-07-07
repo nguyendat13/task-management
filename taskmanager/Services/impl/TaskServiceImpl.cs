@@ -9,8 +9,8 @@ namespace taskmanager.Services
     public class TaskServiceImpl : ITaskService
     {
         private readonly AppDbContext _context;
-        private static readonly List<int> PersonalProgressIds = new() { 1, 2, 3, 6, 8 };
-        private static readonly List<int> GroupProgressIds = new() { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private static readonly List<int> AllowedProgressIds = new() { 1, 2, 3, 4, 5, 6, 7, 8 };
+
         public TaskServiceImpl(AppDbContext context)
         {
             _context = context;
@@ -62,7 +62,8 @@ namespace taskmanager.Services
                 UserId = task.UserId,
                 GroupId = task.GroupId,
                 WorkProgressId = task.WorkProgressId,
-                AllowedProgressIds = task.GroupId == null ? PersonalProgressIds : GroupProgressIds // 👈 THÊM DÒNG NÀY
+                AllowedProgressIds = AllowedProgressIds
+
             };
         }
 
@@ -81,7 +82,8 @@ namespace taskmanager.Services
                 WorkProgressId = t.WorkProgressId,
                 UserId = t.UserId,
                 GroupId = t.GroupId,
-                AllowedProgressIds = t.GroupId == null ? PersonalProgressIds : GroupProgressIds
+                AllowedProgressIds = AllowedProgressIds
+
             });
 
             return result;
@@ -155,17 +157,35 @@ namespace taskmanager.Services
             };
         }
 
+
         public async Task<bool> UpdateTaskAsync(int id, CreateTaskDTO dto)
         {
             var task = await _context.Tasks.FindAsync(id);
             if (task == null) return false;
 
+            // Nếu là task nhóm, kiểm tra xem user có trong nhóm và có phải nhóm trưởng không
+            bool isLeader = false;
+            if (task.GroupId.HasValue)
+            {
+                isLeader = await IsUserLeaderAsync(task.GroupId.Value, dto.UserId);
+            }
+
+            // Nếu là thành viên không phải nhóm trưởng → chỉ cho sửa tiến độ
+            if (!isLeader && task.GroupId.HasValue)
+            {
+                task.WorkProgressId = dto.WorkProgressId ?? task.WorkProgressId;
+                task.UpdatedAt = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+
+            // Nếu là nhóm trưởng hoặc task cá nhân thì được sửa toàn bộ
             task.Title = dto.Title;
             task.Description = dto.Description;
             task.Detail = dto.Detail;
             task.DueDate = dto.DueDate;
             task.UserId = dto.UserId;
-            task.GroupId = dto.GroupId;  // Cập nhật groupId trong task luôn
+            task.GroupId = dto.GroupId;
             task.WorkProgressId = dto.WorkProgressId ?? task.WorkProgressId;
             task.UpdatedAt = DateTime.UtcNow;
 
@@ -175,7 +195,6 @@ namespace taskmanager.Services
             {
                 if (existingLink == null)
                 {
-                    // Tạo mới liên kết
                     var groupItemTask = new GroupItemTask
                     {
                         GroupId = dto.GroupId.Value,
@@ -184,16 +203,12 @@ namespace taskmanager.Services
                     };
                     _context.GroupItemTasks.Add(groupItemTask);
 
-                    // Xóa personal nếu có
                     var personal = await _context.Personals.FirstOrDefaultAsync(p => p.TaskId == id);
                     if (personal != null)
-                    {
                         _context.Personals.Remove(personal);
-                    }
                 }
                 else if (existingLink.GroupId != dto.GroupId.Value)
                 {
-                    // Cập nhật groupId trong bảng trung gian
                     existingLink.GroupId = dto.GroupId.Value;
                     existingLink.AssignedAt = DateTime.UtcNow;
                     _context.GroupItemTasks.Update(existingLink);
@@ -201,11 +216,9 @@ namespace taskmanager.Services
             }
             else
             {
-                // Nếu không có groupId thì xóa liên kết GroupItemTask và tạo Personal
                 if (existingLink != null)
-                {
                     _context.GroupItemTasks.Remove(existingLink);
-                }
+
                 var personal = await _context.Personals.FirstOrDefaultAsync(p => p.TaskId == id);
                 if (personal == null)
                 {
@@ -222,6 +235,13 @@ namespace taskmanager.Services
 
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        private async Task<bool> IsUserLeaderAsync(int groupId, int userId)
+        {
+            var member = await _context.GroupItemUsers
+                .FirstOrDefaultAsync(m => m.GroupId == groupId && m.UserId == userId);
+            return member?.IsLeader == true;
         }
 
         public async Task<bool> DeleteTaskAsync(int id)

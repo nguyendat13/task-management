@@ -130,15 +130,23 @@ namespace taskmanager.Services
         }
 
 
-        public async Task<bool> DeleteGroupAsync(int id)
+        public async Task<bool> DeleteGroupAsync(int groupId, int userId)
         {
-            var group = await _context.Groups.FindAsync(id);
+            var group = await _context.Groups.FindAsync(groupId);
             if (group == null) return false;
+
+            // Kiểm tra user có phải trưởng nhóm không
+            var isLeader = await _context.GroupItemUsers
+                .AnyAsync(g => g.GroupId == groupId && g.UserId == userId && g.IsLeader);
+
+            if (!isLeader)
+                throw new UnauthorizedAccessException("Chỉ trưởng nhóm mới có quyền xóa nhóm.");
 
             _context.Groups.Remove(group);
             await _context.SaveChangesAsync();
 
             return true;
         }
+
     }
 }

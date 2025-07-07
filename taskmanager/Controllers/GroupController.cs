@@ -57,11 +57,19 @@ namespace taskmanager.Controllers
 
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteGroup(int id, [FromBody] DeleteGroupRequestDTO request)
         {
-            var success = await _groupService.DeleteGroupAsync(id);
-            if (!success) return NotFound();
-            return NoContent();
+            try
+            {
+                var result = await _groupService.DeleteGroupAsync(id, request.UserId);
+                if (!result) return NotFound("Nhóm không tồn tại.");
+                return Ok("Xóa nhóm thành công.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
         }
+
     }
 }

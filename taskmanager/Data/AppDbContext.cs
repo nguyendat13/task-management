@@ -23,6 +23,7 @@ namespace taskmanager.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             // Quan hệ Sender/Receiver rõ ràng
             modelBuilder.Entity<Message>()
                 .HasOne(m => m.Sender)
@@ -44,10 +45,39 @@ namespace taskmanager.Data
                 .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Notification>()
-    .HasOne(n => n.RequestUser)
-    .WithMany(u => u.SentRequests)
-    .HasForeignKey(n => n.RequestUserId)
-    .OnDelete(DeleteBehavior.Restrict); // tránh lỗi khi xóa user gửi request
+                .HasOne(n => n.RequestUser)
+                .WithMany(u => u.SentRequests)
+                .HasForeignKey(n => n.RequestUserId)
+                .OnDelete(DeleteBehavior.Restrict); // tránh lỗi khi xóa user gửi request
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.Group)
+                .WithMany()
+                .HasForeignKey(n => n.GroupId)
+                .OnDelete(DeleteBehavior.Cascade); // xóa group sẽ xóa notification liên quan
+
+            modelBuilder.Entity<GroupItemUser>()
+                .HasOne(giu => giu.Group)
+                .WithMany()
+                .HasForeignKey(giu => giu.GroupId)
+                .OnDelete(DeleteBehavior.Cascade); // ✅ Xóa nhóm cũng xóa liên kết người dùng
+
+            modelBuilder.Entity<GroupItemTask>()
+                .HasOne(git => git.Group)
+                .WithMany()
+                .HasForeignKey(git => git.GroupId)
+                .OnDelete(DeleteBehavior.Cascade); // ✅ Xóa nhóm cũng xóa liên kết nhiệm vụ
+
+            modelBuilder.Entity<WorkProgress>().HasData(
+                new WorkProgress { Id = 1, Status = "Đang chờ" },
+                new WorkProgress { Id = 2, Status = "Đang thực hiện" },
+                new WorkProgress { Id = 3, Status = "Đã hoàn thành" },
+                new WorkProgress { Id = 4, Status = "Đang review" },
+                new WorkProgress { Id = 5, Status = "Đã duyệt" },
+                new WorkProgress { Id = 6, Status = "Tạm dừng" },
+                new WorkProgress { Id = 7, Status = "Trễ hạn" },
+                new WorkProgress { Id = 8, Status = "Đã hủy nhiệm vụ" }
+    );
 
         }
 
