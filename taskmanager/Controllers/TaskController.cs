@@ -43,7 +43,7 @@ public class TaskController : ControllerBase
 
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] CreateTaskDTO dto)
+    public async Task<IActionResult> Update(int id, [FromForm] CreateTaskDTO dto)
     {
 
         var success = await _service.UpdateTaskAsync(id, dto);
@@ -67,4 +67,56 @@ public class TaskController : ControllerBase
         var tasks = await _service.GetPersonalTasksAsync(userId);
         return Ok(tasks);
     }
+
+
+
+
+
+    [HttpGet("{id}/attachment")]
+    public async Task<IActionResult> GetAttachment(int id)
+    {
+        var path = await _service.GetAttachmentPathAsync(id);
+        if (string.IsNullOrEmpty(path))
+            return NotFound("Không có file đính kèm.");
+
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", path.TrimStart('/'));
+        if (!System.IO.File.Exists(filePath))
+            return NotFound("Tệp không tồn tại.");
+
+        var contentType = GetContentType(filePath);
+        return PhysicalFile(filePath, contentType, Path.GetFileName(filePath));
+    }
+
+    [HttpGet("{id}/submission")]
+    public async Task<IActionResult> GetSubmission(int id)
+    {
+        var path = await _service.GetSubmissionFilePathAsync(id);
+        if (string.IsNullOrEmpty(path))
+            return NotFound("Không có file đã nộp.");
+
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", path.TrimStart('/'));
+        if (!System.IO.File.Exists(filePath))
+            return NotFound("Tệp không tồn tại.");
+
+        var contentType = GetContentType(filePath);
+        return PhysicalFile(filePath, contentType, Path.GetFileName(filePath));
+    }
+
+    // Hàm phụ trợ lấy content-type
+    private string GetContentType(string path)
+    {
+        var ext = Path.GetExtension(path).ToLowerInvariant();
+        return ext switch
+        {
+            ".txt" => "text/plain",
+            ".pdf" => "application/pdf",
+            ".doc" or ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            ".xls" or ".xlsx" => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            ".png" => "image/png",
+            ".jpg" or ".jpeg" => "image/jpeg",
+            ".gif" => "image/gif",
+            _ => "application/octet-stream"
+        };
+    }
+
 }

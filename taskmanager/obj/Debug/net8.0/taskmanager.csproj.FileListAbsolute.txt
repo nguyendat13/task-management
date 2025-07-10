@@ -116,3 +116,4 @@ D:\projects\.net\taskmanager\taskmanager\bin\Debug\net8.0\Microsoft.AspNetCore.A
 D:\projects\.net\taskmanager\taskmanager\bin\Debug\net8.0\taskmanager.staticwebassets.endpoints.json
 D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets.build.json.cache
 D:\projects\.net\taskmanager\taskmanager\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+D:\projects\.net\taskmanager\taskmanager\bin\Debug\net8.0\taskmanager.staticwebassets.runtime.json

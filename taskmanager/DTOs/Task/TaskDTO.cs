@@ -7,6 +7,10 @@
         public string? Description { get; set; }
         public string? Detail { get; set; }
         public DateTime? DueDate { get; set; }
+        public string? AttachmentPath { get; set; }
+        public string? SubmissionFilePath { get; set; }
+        public string? AttachmentOriginalName { get; set; }
+        public string? SubmissionOriginalName { get; set; }
 
         public int UserId { get; set; }
         public int? GroupId { get; set; }

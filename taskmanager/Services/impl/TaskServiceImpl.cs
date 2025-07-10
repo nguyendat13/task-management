@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using taskmanager.Data;
 using taskmanager.DTOs.Group;
 using taskmanager.DTOs.Task;
@@ -43,6 +44,10 @@ namespace taskmanager.Services
                 DueDate = t.DueDate,
                 UserId = t.UserId,
                 GroupId = t.GroupId,
+                AttachmentPath = t.AttachmentPath,
+                SubmissionFilePath = t.SubmissionFilePath,
+                AttachmentOriginalName = t.AttachmentOriginalName,
+                SubmissionOriginalName = t.SubmissionOriginalName,
                 WorkProgressId = t.WorkProgressId
             }).ToListAsync();
         }
@@ -62,6 +67,10 @@ namespace taskmanager.Services
                 UserId = task.UserId,
                 GroupId = task.GroupId,
                 WorkProgressId = task.WorkProgressId,
+                AttachmentPath = task.AttachmentPath,
+                SubmissionFilePath = task.SubmissionFilePath,
+                AttachmentOriginalName = task.AttachmentOriginalName,
+                SubmissionOriginalName = task.SubmissionOriginalName,
                 AllowedProgressIds = AllowedProgressIds
 
             };
@@ -82,6 +91,10 @@ namespace taskmanager.Services
                 WorkProgressId = t.WorkProgressId,
                 UserId = t.UserId,
                 GroupId = t.GroupId,
+                AttachmentPath = t.AttachmentPath,
+                SubmissionFilePath = t.SubmissionFilePath,
+                AttachmentOriginalName = t.AttachmentOriginalName,
+                SubmissionOriginalName = t.SubmissionOriginalName,
                 AllowedProgressIds = AllowedProgressIds
 
             });
@@ -116,6 +129,34 @@ namespace taskmanager.Services
             };
 
             _context.Tasks.Add(task);
+            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+            if (!Directory.Exists(uploadPath))
+                Directory.CreateDirectory(uploadPath);
+
+            // Với file đính kèm
+            if (dto.Attachment != null && dto.Attachment.Length > 0)
+            {
+                var fileName = $"attachment_{task.Id}_{DateTime.Now.Ticks}{Path.GetExtension(dto.Attachment.FileName)}";
+                var filePath = Path.Combine(uploadPath, fileName);
+                using var stream = new FileStream(filePath, FileMode.Create);
+                await dto.Attachment.CopyToAsync(stream);
+
+                task.AttachmentPath = $"/uploads/{fileName}";
+                task.AttachmentOriginalName = dto.Attachment.FileName; // ← Lưu tên gốc
+            }
+
+            // Với file nộp
+            if (dto.SubmissionFile != null && dto.SubmissionFile.Length > 0)
+            {
+                var fileName = $"submission_{task.Id}_{DateTime.Now.Ticks}{Path.GetExtension(dto.SubmissionFile.FileName)}";
+                var filePath = Path.Combine(uploadPath, fileName);
+                using var stream = new FileStream(filePath, FileMode.Create);
+                await dto.SubmissionFile.CopyToAsync(stream);
+
+                task.SubmissionFilePath = $"/uploads/{fileName}";
+                task.SubmissionOriginalName = dto.SubmissionFile.FileName; // ← Lưu tên gốc
+            }
+
             await _context.SaveChangesAsync();
 
             // Nếu là personal task (GroupId == null) → lưu Personal
@@ -130,7 +171,7 @@ namespace taskmanager.Services
                 };
                 _context.Personals.Add(personal);
                 await _context.SaveChangesAsync();
-            }
+            }   
             else
             {
                 // Nếu là task trong group, lưu vào bảng trung gian group_item_task
@@ -153,6 +194,8 @@ namespace taskmanager.Services
                 DueDate = task.DueDate,
                 UserId = task.UserId,
                 GroupId = task.GroupId,
+                AttachmentPath = task.AttachmentPath,
+                SubmissionFilePath = task.SubmissionFilePath,
                 WorkProgressId = task.WorkProgressId
             };
         }
@@ -188,6 +231,35 @@ namespace taskmanager.Services
             task.GroupId = dto.GroupId;
             task.WorkProgressId = dto.WorkProgressId ?? task.WorkProgressId;
             task.UpdatedAt = DateTime.UtcNow;
+
+            var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
+            if (!Directory.Exists(uploadPath))
+                Directory.CreateDirectory(uploadPath);
+
+            // Với file đính kèm
+            if (dto.Attachment != null && dto.Attachment.Length > 0)
+            {
+                var fileName = $"attachment_{task.Id}_{DateTime.Now.Ticks}{Path.GetExtension(dto.Attachment.FileName)}";
+                var filePath = Path.Combine(uploadPath, fileName);
+                using var stream = new FileStream(filePath, FileMode.Create);
+                await dto.Attachment.CopyToAsync(stream);
+
+                task.AttachmentPath = $"/uploads/{fileName}";
+                task.AttachmentOriginalName = dto.Attachment.FileName; // ← Lưu tên gốc
+            }
+
+            // Với file nộp
+            if (dto.SubmissionFile != null && dto.SubmissionFile.Length > 0)
+            {
+                var fileName = $"submission_{task.Id}_{DateTime.Now.Ticks}{Path.GetExtension(dto.SubmissionFile.FileName)}";
+                var filePath = Path.Combine(uploadPath, fileName);
+                using var stream = new FileStream(filePath, FileMode.Create);
+                await dto.SubmissionFile.CopyToAsync(stream);
+
+                task.SubmissionFilePath = $"/uploads/{fileName}";
+                task.SubmissionOriginalName = dto.SubmissionFile.FileName; // ← Lưu tên gốc
+            }
+
 
             var existingLink = await _context.GroupItemTasks.FirstOrDefaultAsync(g => g.TaskId == id);
 
@@ -269,6 +341,17 @@ namespace taskmanager.Services
             return true;
         }
 
+        public async Task<string?> GetAttachmentPathAsync(int taskId)
+        {
+            var task = await _context.Tasks.FindAsync(taskId);
+            return task?.AttachmentPath;
+        }
+
+        public async Task<string?> GetSubmissionFilePathAsync(int taskId)
+        {
+            var task = await _context.Tasks.FindAsync(taskId);
+            return task?.SubmissionFilePath;
+        }
 
     }
 }

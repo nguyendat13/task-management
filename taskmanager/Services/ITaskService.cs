@@ -13,5 +13,10 @@ namespace taskmanager.Services
         Task<TaskDTO> CreateTaskAsync(CreateTaskDTO dto);
         Task<bool> UpdateTaskAsync(int id, CreateTaskDTO dto);
         Task<bool> DeleteTaskAsync(int id);
+
+        Task<string?> GetAttachmentPathAsync(int taskId);
+        Task<string?> GetSubmissionFilePathAsync(int taskId);
+
     }
 }
+    

@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "D:\\projects\\.net\\taskmanager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\notificationserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\notificationserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\groupserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\groupserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\groupitemuserserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\groupitemuserserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\taskserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\taskserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "NotificationServiceImpl.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\NotificationServiceImpl.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\NotificationServiceImpl.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\NotificationServiceImpl.cs",
-              "RelativeToolTip": "taskmanager\\Services\\impl\\NotificationServiceImpl.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAmwDEAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-05T15:13:56.256Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GroupItemUserServiceImpl.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\GroupItemUserServiceImpl.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\GroupItemUserServiceImpl.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\GroupItemUserServiceImpl.cs",
-              "RelativeToolTip": "taskmanager\\Services\\impl\\GroupItemUserServiceImpl.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-05T15:11:18.648Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "GroupServiceImpl.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\GroupServiceImpl.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\GroupServiceImpl.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\GroupServiceImpl.cs",
-              "RelativeToolTip": "taskmanager\\Services\\impl\\GroupServiceImpl.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Title": "TaskController.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskController.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Controllers\\TaskController.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskController.cs",
+              "RelativeToolTip": "taskmanager\\Controllers\\TaskController.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAmwCcAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-05T15:11:16.545Z",
+              "WhenOpened": "2025-07-08T16:19:55.677Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Data\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Data\\AppDbContext.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Data\\AppDbContext.cs",
-              "RelativeToolTip": "taskmanager\\Data\\AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEEAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-05T14:58:57.845Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "TaskServiceImpl.cs",
               "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskServiceImpl.cs",
               "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\TaskServiceImpl.cs",
               "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskServiceImpl.cs",
               "RelativeToolTip": "taskmanager\\Services\\impl\\TaskServiceImpl.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAkwIYAAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-01T14:13:28.367Z",
+              "WhenOpened": "2025-07-08T15:26:34.555Z",
               "EditorCaption": ""
             }
           ]

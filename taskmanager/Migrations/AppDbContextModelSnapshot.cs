@@ -321,6 +321,12 @@ namespace taskmanager.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("AttachmentOriginalName")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("AttachmentPath")
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime(6)");
 
@@ -335,6 +341,12 @@ namespace taskmanager.Migrations
 
                     b.Property<int?>("GroupId")
                         .HasColumnType("int");
+
+                    b.Property<string>("SubmissionFilePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("SubmissionOriginalName")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .IsRequired()

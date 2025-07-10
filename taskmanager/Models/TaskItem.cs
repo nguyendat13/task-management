@@ -19,6 +19,13 @@ namespace taskmanager.Models
 
         public DateTime? DueDate { get; set; }
 
+
+        public string? AttachmentPath { get; set; }
+        public string? SubmissionFilePath { get; set; }
+
+        public string? AttachmentOriginalName { get; set; }
+        public string? SubmissionOriginalName { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 

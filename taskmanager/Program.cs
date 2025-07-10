@@ -135,6 +135,7 @@ if (app.Environment.IsDevelopment())
         Console.WriteLine("Không thể mở trình duyệt: " + ex.Message);
     }
 }
+app.UseStaticFiles(); // Cho phép truy cập wwwroot
 
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
