@@ -1,5 +1,15 @@
 import axiosInstance from "./axiosHttp";
 
+const downloadBlob = (blob, fileName) => {
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = fileName;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  window.URL.revokeObjectURL(url);
+};
 const TaskService = {
   getAllTasks: async () => {
     try {
@@ -42,14 +52,28 @@ const TaskService = {
   },
 
   updateTask: async (id, taskData) => {
-    try {
-      const response = await axiosInstance.put(`/Task/${id}`, taskData);
-    return response.status === 200 && response.data === true; // ← đảm bảo boolean true
-    } catch (error) {
-      console.error("Lỗi updateTask:", error.response?.data || error.message);
+  try {
+    const isFormData = taskData instanceof FormData;
+
+    const response = await axiosInstance.put(
+      `/Task/${id}`,
+      taskData,
+      isFormData
+        ? {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        : undefined // nếu không phải FormData thì dùng mặc định
+    );
+
+    return response.status === 200 && response.data === true;
+  } catch (error) {
+    console.error("Lỗi updateTask:", error.response?.data || error.message);
     return false;
-    }
-  },
+  }
+},
+
 
   deleteTask: async (id) => {
     try {
@@ -60,6 +84,50 @@ const TaskService = {
       return null;
     }
   },
+  getAttachmentFile: async (taskId, originalName) => {
+  try {
+    const response = await axiosInstance.get(`/Task/${taskId}/attachment`, {
+      responseType: "blob",
+    });
+
+    const blob = new Blob([response.data]);
+    downloadBlob(blob, originalName || "file");
+  } catch (error) {
+    console.error("Lỗi tải file đính kèm:", error.response?.data || error.message);
+    alert("Không thể tải file đính kèm.");
+  }
+},
+getSubmissionFile: async (taskId, originalName) => {
+  try {
+    const response = await axiosInstance.get(`/Task/${taskId}/submission`, {
+      responseType: "blob",
+    });
+
+    const blob = new Blob([response.data]);
+    downloadBlob(blob, originalName || "file");
+  } catch (error) {
+    console.error("Lỗi tải file đã nộp:", error.response?.data || error.message);
+    alert("Không thể tải file đã nộp.");
+  }
+},
+getFileBlob: async (taskId, type) => {
+  try {
+    const url =
+      type === "attachment"
+        ? `/Task/${taskId}/attachment`
+        : `/Task/${taskId}/submission`;
+
+    const response = await axiosInstance.get(url, {
+      responseType: "blob",
+    });
+
+    return response;
+  } catch (error) {
+    console.error("Lỗi tải blob:", error.response?.data || error.message);
+    throw error;
+  }
+},
+
 };
 
 export default TaskService;
