@@ -71,7 +71,11 @@ namespace taskmanager.Services
                 SubmissionFilePath = task.SubmissionFilePath,
                 AttachmentOriginalName = task.AttachmentOriginalName,
                 SubmissionOriginalName = task.SubmissionOriginalName,
-                AllowedProgressIds = AllowedProgressIds
+                AllowedProgressIds = AllowedProgressIds,
+                AssigneeIds = await _context.TaskAssignees
+                .Where(a => a.TaskId == task.Id)
+                .Select(a => a.UserId)
+                .ToListAsync()
 
             };
         }
@@ -129,6 +133,22 @@ namespace taskmanager.Services
             };
 
             _context.Tasks.Add(task);
+            await _context.SaveChangesAsync();
+            // Gán người được giao nhiệm vụ nếu có
+            if (dto.AssigneeIds != null && dto.AssigneeIds.Count > 0)
+            {
+                foreach (var assigneeId in dto.AssigneeIds)
+                {
+                    var assignee = new TaskAssignee
+                    {
+                        TaskId = task.Id,
+                        UserId = assigneeId
+                    };
+                    _context.TaskAssignees.Add(assignee);
+                }
+                await _context.SaveChangesAsync();
+            }
+
             var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
             if (!Directory.Exists(uploadPath))
                 Directory.CreateDirectory(uploadPath);
@@ -235,6 +255,23 @@ namespace taskmanager.Services
             var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads");
             if (!Directory.Exists(uploadPath))
                 Directory.CreateDirectory(uploadPath);
+
+            // Nếu là nhóm trưởng và có danh sách AssigneeIds mới
+            if (isLeader && dto.AssigneeIds != null)
+            {
+                var currentAssignees = _context.TaskAssignees.Where(a => a.TaskId == task.Id);
+                _context.TaskAssignees.RemoveRange(currentAssignees);
+
+                foreach (var assigneeId in dto.AssigneeIds)
+                {
+                    var assignee = new TaskAssignee
+                    {
+                        TaskId = task.Id,
+                        UserId = assigneeId
+                    };
+                    _context.TaskAssignees.Add(assignee);
+                }
+            }
 
             // Với file đính kèm
             if (dto.Attachment != null && dto.Attachment.Length > 0)

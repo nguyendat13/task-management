@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\projects\\.net\\taskmanager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\taskserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\taskserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\taskassigneecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\taskassigneecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\taskassigneeserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\taskassigneeserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\itaskassigneeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\itaskassigneeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TaskController.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskController.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Controllers\\TaskController.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskController.cs",
-              "RelativeToolTip": "taskmanager\\Controllers\\TaskController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAmwCcAAAA8AAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "TaskAssigneeController.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskAssigneeController.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Controllers\\TaskAssigneeController.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskAssigneeController.cs",
+              "RelativeToolTip": "taskmanager\\Controllers\\TaskAssigneeController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAkwCIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T16:19:55.677Z",
+              "WhenOpened": "2025-07-17T18:04:40.377Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TaskServiceImpl.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskServiceImpl.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\TaskServiceImpl.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskServiceImpl.cs",
-              "RelativeToolTip": "taskmanager\\Services\\impl\\TaskServiceImpl.cs",
-              "ViewState": "AgIAAHsAAAAAAAAAAAAkwIYAAABCAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "TaskAssigneeServiceImpl.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
+              "RelativeToolTip": "taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwCwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-08T15:26:34.555Z",
+              "WhenOpened": "2025-07-17T18:04:03.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ITaskAssigneeService.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\ITaskAssigneeService.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Services\\ITaskAssigneeService.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\ITaskAssigneeService.cs",
+              "RelativeToolTip": "taskmanager\\Services\\ITaskAssigneeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T18:03:55.466Z",
               "EditorCaption": ""
             }
           ]

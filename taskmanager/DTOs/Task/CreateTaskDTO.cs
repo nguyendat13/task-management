@@ -13,6 +13,9 @@ namespace taskmanager.DTOs.Task
         public int? GroupId { get; set; }
         public int? WorkProgressId { get; set; }
 
+
+        public List<int>? AssigneeIds { get; set; }
+
         [NotMapped]
         public IFormFile? Attachment { get; set; }
 

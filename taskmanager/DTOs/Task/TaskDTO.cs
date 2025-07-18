@@ -16,6 +16,6 @@
         public int? GroupId { get; set; }
         public int? WorkProgressId { get; set; }
         public List<int> AllowedProgressIds { get; set; } = new(); // thêm dòng này
-
+        public List<int> AssigneeIds { get; set; } = new();
     }
 }

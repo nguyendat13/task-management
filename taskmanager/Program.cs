@@ -41,7 +41,7 @@ builder.Services.AddScoped<IGroupService, GroupServiceImpl>();
 builder.Services.AddScoped<IGroupItemTaskService, GroupItemTaskServiceImpl>();
 builder.Services.AddScoped<IGroupItemUserService, GroupItemUserServiceImpl>();
 builder.Services.AddScoped<INotificationService, NotificationServiceImpl>();
-
+builder.Services.AddScoped<ITaskAssigneeService,TaskAssigneeServiceImpl>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 // DbContext

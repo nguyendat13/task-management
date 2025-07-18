@@ -28,7 +28,7 @@ public class TaskController : ControllerBase
     public async Task<IActionResult> GetByUserId(int userId) => Ok(await _service.GetTasksByUserIdAsync(userId));
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateTaskDTO dto)
+    public async Task<IActionResult> Create([FromForm] CreateTaskDTO dto)
     {
         try
         {
@@ -37,8 +37,13 @@ public class TaskController : ControllerBase
         }
         catch (Exception ex)
         {
-            return BadRequest(new { message = ex.Message });
+            return BadRequest(new
+            {
+                message = ex.Message,
+                inner = ex.InnerException?.Message
+            });
         }
+
     }
 
 

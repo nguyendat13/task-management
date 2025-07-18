@@ -39,6 +39,7 @@ namespace taskmanager.Models
         [ForeignKey("WorkProgress")]
         public int? WorkProgressId { get; set; }
         public WorkProgress? WorkProgress { get; set; }
+        public ICollection<TaskAssignee> Assignees { get; set; }
 
         public ICollection<Message> Messages { get; set; }
         public ICollection<Notification> Notifications { get; set; }

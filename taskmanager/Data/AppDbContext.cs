@@ -20,7 +20,7 @@ namespace taskmanager.Data
         public DbSet<WorkProgress> WorkProgresses { get; set; }
         public DbSet<GroupItemUser> GroupItemUsers { get; set; }
         public DbSet<GroupItemTask> GroupItemTasks { get; set; }
-
+        public DbSet<TaskAssignee> TaskAssignees { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -67,6 +67,12 @@ namespace taskmanager.Data
                 .WithMany()
                 .HasForeignKey(git => git.GroupId)
                 .OnDelete(DeleteBehavior.Cascade); // ✅ Xóa nhóm cũng xóa liên kết nhiệm vụ
+
+            modelBuilder.Entity<TaskAssignee>()
+                .HasOne(ta => ta.TaskItem)
+                .WithMany(t => t.Assignees)
+                .HasForeignKey(ta => ta.TaskId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<WorkProgress>().HasData(
                 new WorkProgress { Id = 1, Status = "Đang chờ" },

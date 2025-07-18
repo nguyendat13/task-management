@@ -313,6 +313,29 @@ namespace taskmanager.Migrations
                     b.ToTable("settings");
                 });
 
+            modelBuilder.Entity("taskmanager.Models.TaskAssignee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TaskId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("taskassignee");
+                });
+
             modelBuilder.Entity("taskmanager.Models.TaskItem", b =>
                 {
                     b.Property<int>("Id")
@@ -618,6 +641,25 @@ namespace taskmanager.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("taskmanager.Models.TaskAssignee", b =>
+                {
+                    b.HasOne("taskmanager.Models.TaskItem", "TaskItem")
+                        .WithMany("Assignees")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("taskmanager.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TaskItem");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("taskmanager.Models.TaskItem", b =>
                 {
                     b.HasOne("taskmanager.Models.Group", "Group")
@@ -673,6 +715,8 @@ namespace taskmanager.Migrations
 
             modelBuilder.Entity("taskmanager.Models.TaskItem", b =>
                 {
+                    b.Navigation("Assignees");
+
                     b.Navigation("Messages");
 
                     b.Navigation("Notifications");

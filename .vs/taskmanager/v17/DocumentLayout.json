@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "D:\\projects\\.net\\taskmanager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\taskcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\dtos\\task\\taskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\dtos\\task\\taskdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\taskserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\taskserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\models\\taskitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\models\\taskitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\taskassigneeserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\taskassigneeserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\dtos\\taskassignee\\taskassigneedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\dtos\\taskassignee\\taskassigneedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\taskassigneecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\taskassigneecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\itaskassigneeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\itaskassigneeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,54 +35,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TaskController.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskController.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Controllers\\TaskController.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskController.cs",
-              "RelativeToolTip": "taskmanager\\Controllers\\TaskController.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAuwHAAAABrAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T16:05:29.704Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TaskDTO.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\DTOs\\Task\\TaskDTO.cs",
-              "RelativeDocumentMoniker": "taskmanager\\DTOs\\Task\\TaskDTO.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\DTOs\\Task\\TaskDTO.cs",
-              "RelativeToolTip": "taskmanager\\DTOs\\Task\\TaskDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T15:59:46.583Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TaskItem.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Models\\TaskItem.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Models\\TaskItem.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Models\\TaskItem.cs",
-              "RelativeToolTip": "taskmanager\\Models\\TaskItem.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T15:55:14.194Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "TaskServiceImpl.cs",
               "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskServiceImpl.cs",
               "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\TaskServiceImpl.cs",
               "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskServiceImpl.cs",
               "RelativeToolTip": "taskmanager\\Services\\impl\\TaskServiceImpl.cs",
-              "ViewState": "AgIAAOAAAAAAAAAAAAAuwHEAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAABEBAAAAAAAAAADwv2EBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-10T15:44:21.032Z",
+              "WhenOpened": "2025-07-18T13:51:45.814Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TaskAssigneeDTO.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\DTOs\\TaskAssignee\\TaskAssigneeDTO.cs",
+              "RelativeDocumentMoniker": "taskmanager\\DTOs\\TaskAssignee\\TaskAssigneeDTO.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\DTOs\\TaskAssignee\\TaskAssigneeDTO.cs",
+              "RelativeToolTip": "taskmanager\\DTOs\\TaskAssignee\\TaskAssigneeDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-18T13:51:33.675Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TaskAssigneeController.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskAssigneeController.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Controllers\\TaskAssigneeController.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskAssigneeController.cs",
+              "RelativeToolTip": "taskmanager\\Controllers\\TaskAssigneeController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAkwCIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T18:04:40.377Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TaskAssigneeServiceImpl.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
+              "RelativeToolTip": "taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAYwCUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T18:04:03.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ITaskAssigneeService.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\ITaskAssigneeService.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Services\\ITaskAssigneeService.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\ITaskAssigneeService.cs",
+              "RelativeToolTip": "taskmanager\\Services\\ITaskAssigneeService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-17T18:03:55.466Z"
             }
           ]
         }
