@@ -1,22 +1,44 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TaskService from "../../../services/TaskService";
 import { getUserIdFromLocalStorage } from "../../../services/utils/auth";
+import GroupItemUserService from "../../../services/GroupItemUserService";
 
 const AddGroupTask = () => {
   const navigate = useNavigate();
-  const { groupId } = useParams(); // Lấy groupId từ URL nếu có
+  const { groupId } = useParams();
   const userId = getUserIdFromLocalStorage();
+
+
   const [form, setForm] = useState({
     title: "",
     description: "",
     detail: "",
     dueDate: "",
-    dueTime: "12:00", 
+    dueTime: "12:00",
+    attachment: null, // 👈 thêm tệp
+    assigneeId: "",
   });
+ const [groupMembers, setGroupMembers] = useState([]);
+
+  // 🔁 Lấy danh sách thành viên nhóm
+  useEffect(() => {
+    const fetchMembers = async () => {
+      if (groupId) {
+        const members = await GroupItemUserService.getUsersByGroupId(groupId);
+        if (members) setGroupMembers(members);
+      }
+    };
+    fetchMembers();
+  }, [groupId]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value, files } = e.target;
+    if (name === "attachment") {
+      setForm({ ...form, attachment: files[0] });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -33,22 +55,24 @@ const AddGroupTask = () => {
         ? `${form.dueDate}T${form.dueTime}:00`
         : null;
 
-    const taskPayload = {
-      title: form.title,
-      description: form.description,
-      detail: form.detail,
-      dueDate: dueDateTime,
-      userId: parseInt(userId),
-      workProgressId: 1, // nếu có mặc định
-      groupId: groupId ? parseInt(groupId) : null, // thêm groupId nếu có
-    };
-
+    // 👇 Tạo formData để gửi kèm file
+    const formData = new FormData();
+    formData.append("title", form.title);
+    formData.append("description", form.description);
+    formData.append("detail", form.detail);
+    formData.append("dueDate", dueDateTime);
+    formData.append("userId", parseInt(userId));
+    formData.append("workProgressId", 1);
+    if (groupId) formData.append("groupId", parseInt(groupId));
+    if (form.attachment) formData.append("attachment", form.attachment);
+    if (form.assigneeId) formData.append("assigneeId", form.assigneeId);
     try {
-      await TaskService.createTask(taskPayload);
+      await TaskService.createTask(formData);
       alert("Thêm công việc thành công!");
       navigate(groupId ? `/nhom/${groupId}` : "/danh-sach-cong-viec");
     } catch (error) {
       alert("Thêm công việc thất bại!");
+      console.error(error);
     }
   };
 
@@ -114,11 +138,46 @@ const AddGroupTask = () => {
           </div>
         </div>
 
+
+      {/* 👇 Chọn người được giao nhiệm vụ */}
+        {groupId && (
+          <div>
+            <label className="block mb-1 text-gray-300">Giao cho:</label>
+            <select
+              name="assigneeId"
+              value={form.assigneeId}
+              onChange={handleChange}
+              className="w-full p-2 rounded border border-gray-600 bg-gray-900 text-white"
+              required
+            >
+              <option value="">-- Chọn thành viên --</option>
+              {groupMembers.map((member) => (
+                <option key={member.userId} value={member.userId}>
+                  {member.userName}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+
+        {/* 👇 Tệp đính kèm */}
+        <div>
+          <label className="block mb-1 text-gray-300">Tệp đính kèm:</label>
+          <input
+            type="file"
+            name="attachment"
+            accept=".pdf,.doc,.docx,.xlsx,.xls,.png,.jpg,.jpeg,.txt,.sql"
+            onChange={handleChange}
+            className="text-white"
+          />
+        </div>
+
         <div className="flex justify-between">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="bg-gray-600 px-5 py-2 rounded hover:bg-gray-700"
+            className="bg-gray-600 px-5 py-2 rounded hover:bg-gray-700 text-white"
           >
             Quay lại
           </button>

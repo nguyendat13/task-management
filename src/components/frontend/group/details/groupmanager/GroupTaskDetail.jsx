@@ -4,7 +4,7 @@ import GroupItemUserService from "../../../../../services/GroupItemUserService";
 import TaskService from "../../../../../services/TaskService";
 import WorkProgressService from "../../../../../services/WorkProgressService";
 import { getUserIdFromLocalStorage } from "../../../../../services/utils/auth";
-
+import TaskAssignService from "../../../../../services/TaskAssignService";
 const GroupTaskDetail = () => {
   const { groupId, taskId } = useParams();
   const navigate = useNavigate();
@@ -17,30 +17,38 @@ const GroupTaskDetail = () => {
   const [isLeader, setIsLeader] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const [assignees, setAssignees] = useState([]);
+  const [isAssignee, setIsAssignee] = useState(false);
+
   useEffect(() => {
-    fetchData();
-  }, [taskId, groupId]);
+  fetchData();
+}, [taskId, groupId]);
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const [fetchedTask, progress, members] = await Promise.all([
-        TaskService.getTaskById(Number(taskId)),
-        WorkProgressService.getAll(),
-        GroupItemUserService.getUsersByGroupId(groupId)
-      ]);
+const fetchData = async () => {
+  setLoading(true);
+  try {
+    const [fetchedTask, progress, members, taskAssignees] = await Promise.all([
+      TaskService.getTaskById(Number(taskId)),
+      WorkProgressService.getAll(),
+      GroupItemUserService.getUsersByGroupId(groupId),
+      TaskAssignService.getByTaskId(taskId), // ✅ đúng thứ tự và gọi API
+    ]);
 
-      setTask(fetchedTask);
-      setProgressList(progress);
+    setTask(fetchedTask);
+    setProgressList(progress);
+    setAssignees(taskAssignees); // ✅ lưu lại danh sách assignee
 
-      const currentUser = members.find((m) => m.userId === userId);
-      setIsLeader(currentUser?.isLeader || false);
-    } catch (error) {
-      console.error("Lỗi khi tải dữ liệu:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    const currentUser = members.find((m) => m.userId === userId);
+    setIsLeader(currentUser?.isLeader || false);
+
+    const isAssigned = taskAssignees.some((a) => a.userId === userId); // ✅ userId hiện tại có trong assignee
+    setIsAssignee(isAssigned);
+  } catch (error) {
+    console.error("Lỗi khi tải dữ liệu:", error);
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -121,6 +129,15 @@ const handlePreviewFile = async (type) => {
         disabled={!isLeader}
         className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
       />
+      
+      <div className="mt-2 text-sm text-gray-300">
+        <span className="font-semibold text-white">Thành viên được giao:</span>{" "}
+        {assignees.length > 0 ? (
+          assignees.map((a) => a.name).join(", ")
+        ) : (
+          <span className="italic text-gray-400">Chưa có</span>
+        )}
+      </div>
 
       <label className="block mt-3 text-sm">Mô tả:</label>
       <textarea
@@ -140,20 +157,31 @@ const handlePreviewFile = async (type) => {
         rows={4}
         className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
       />
-        <label className="block mt-3 text-sm">Tệp đính kèm:</label>
-        <input
-          type="file"
-          name="attachment"
-          onChange={(e) => setTask((prev) => ({ ...prev, attachment: e.target.files[0] }))}
-          className="text-white"
-        />
 
-          <button
-    onClick={() => handlePreviewFile("attachment")}
-    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-  >
-    📎 Xem tệp đính kèm
-  </button>
+          {isLeader && (
+        <>
+          <label className="block mt-3 text-sm">Tệp đính kèm (nhóm trưởng tải lên):</label>
+          <input
+            type="file"
+            name="attachment"
+            onChange={(e) =>
+              setTask((prev) => ({ ...prev, attachment: e.target.files[0] }))
+            }
+            className="text-white"
+          />
+        </>
+      )}
+      <button
+          onClick={() =>
+            task.attachmentPath
+              ? handlePreviewFile("attachment")
+              : alert("Không có tệp đính kèm để xem.")
+          }
+          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+        >
+          📎 Xem tệp đính kèm
+        </button>
+
 
 
       <label className="block mt-3 text-sm">Hạn chót:</label>
@@ -171,43 +199,57 @@ const handlePreviewFile = async (type) => {
         name="workProgressId"
         value={task.workProgressId || ""}
         onChange={handleChange}
+        disabled={!isLeader && !isAssignee} // ✅ chỉ leader hoặc được giao mới chỉnh sửa
         className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
       >
-        {(isLeader 
-          ? progressList
-          : progressList.filter(p => [2, 3].includes(p.id)) // chỉ cho phép id 2 và 3 cho member
-        ).map((p) => (
-          <option key={p.id} value={p.id}>
-            {p.status}
-          </option>
-        ))}
+        {progressList.map((p) => {
+    // Nếu không phải leader => chỉ cho chọn tiến độ 2 hoặc 3
+    if (!isLeader && ![2, 3].includes(p.id)) return null;
+    return (
+      <option key={p.id} value={p.id}>
+        {p.status}
+      </option>
+    );
+  })}
       </select>
-      <label className="block mt-3 text-sm">Nộp task:</label>
-      <input
-        type="file"
-        name="submissionFile"
-        onChange={(e) => setTask((prev) => ({ ...prev, submissionFile: e.target.files[0] }))}
-        className="text-white"
-      />
 
-        <button
-      onClick={() => handlePreviewFile("submission")}
-      className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
-    >
-      📄 Xem bài nộp
-    </button>
-{previewUrl && previewFileName && (
-  <div className="mt-6 bg-gray-800 p-4 rounded shadow">
-    <div className="flex justify-between items-center mb-3">
-      <h3 className="text-white font-semibold">Xem trước tệp: {previewFileName}</h3>
-      <a
-        href={previewUrl}
-        download={previewFileName}
-        className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm"
+     {isAssignee && (
+  <>
+    <label className="block mt-3 text-sm">Nộp bài (dành cho người được giao):</label>
+    <input
+      type="file"
+      name="submission"
+      onChange={(e) =>
+        setTask((prev) => ({ ...prev, submission: e.target.files[0] }))
+      }
+      className="text-white"
+    />
+  </>
+)}
+
+       <button
+        onClick={() =>
+          task.submissionFilePath
+            ? handlePreviewFile("submission")
+            : alert("Không có bài nộp để xem.")
+        }
+        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
       >
-        Tải xuống
-      </a>
-    </div>
+        📄 Xem bài nộp
+      </button>
+
+    {previewUrl && previewFileName && (
+      <div className="mt-6 bg-gray-800 p-4 rounded shadow">
+        <div className="flex justify-between items-center mb-3">
+          <h3 className="text-white font-semibold">Xem trước tệp: {previewFileName}</h3>
+          <a
+            href={previewUrl}
+            download={previewFileName}
+            className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm"
+          >
+            Tải xuống
+          </a>
+        </div>
 
     {/\.(pdf)$/i.test(previewFileName) ? (
       <iframe
@@ -228,9 +270,6 @@ const handlePreviewFile = async (type) => {
     )}
   </div>
 )}
-
-
-
 
       <div className="flex justify-end mt-6 space-x-2">
         <button

@@ -41,15 +41,20 @@ const TaskService = {
     }
   },
 
-  createTask: async (taskData) => {
-    try {
-      const response = await axiosInstance.post("/Task", taskData);
-      return response.data;
-    } catch (error) {
-      console.error("Lỗi createTask:", error.response?.data || error.message);
-      return null;
-    }
-  },
+ 
+createTask: async (taskData) => {
+  try {
+    const response = await axiosInstance.post("/Task", taskData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Lỗi createTask:", error.response?.data || error.message);
+    return null;
+  }
+},
 
   updateTask: async (id, taskData) => {
   try {
