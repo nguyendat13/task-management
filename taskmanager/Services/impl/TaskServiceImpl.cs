@@ -11,10 +11,12 @@ namespace taskmanager.Services
     {
         private readonly AppDbContext _context;
         private static readonly List<int> AllowedProgressIds = new() { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private readonly INotificationService _notificationService;
 
-        public TaskServiceImpl(AppDbContext context)
+        public TaskServiceImpl(AppDbContext context, INotificationService notificationService)
         {
             _context = context;
+            _notificationService = notificationService;
         }
         public async Task<IEnumerable<TaskDTO>> GetPersonalTasksAsync(int userId)
         {
@@ -203,6 +205,9 @@ namespace taskmanager.Services
                 };
                 _context.GroupItemTasks.Add(groupItemTask);
                 await _context.SaveChangesAsync();
+
+                await _notificationService.NotifyTaskCreatedToGroupAsync(task.GroupId.Value, task.Id, task.Title, dto.UserId); //thêm thông báo đến thành viên nhóm khi tạo task
+
             }
 
             return new TaskDTO
@@ -239,6 +244,14 @@ namespace taskmanager.Services
                 task.WorkProgressId = dto.WorkProgressId ?? task.WorkProgressId;
                 task.UpdatedAt = DateTime.UtcNow;
                 await _context.SaveChangesAsync();
+
+                // Truy xuất Status từ WorkProgress table
+                var progress = await _context.WorkProgresses
+                    .FirstOrDefaultAsync(wp => wp.Id == task.WorkProgressId);
+                var statusText = progress?.Status ?? "Không rõ";
+
+                await _notificationService.NotifyLeaderTaskProgressChangedAsync(task.Id, dto.UserId, statusText);
+
                 return true;
             }
 

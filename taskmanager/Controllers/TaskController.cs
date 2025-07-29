@@ -8,10 +8,12 @@ using taskmanager.Services;
 public class TaskController : ControllerBase
 {
     private readonly ITaskService _service;
+    private readonly INotificationService _notificationService;
 
-    public TaskController(ITaskService service)
+    public TaskController(ITaskService service, INotificationService notificationService)
     {
         _service = service;
+        _notificationService = notificationService;
     }
 
     [HttpGet]
@@ -33,6 +35,7 @@ public class TaskController : ControllerBase
         try
         {
             var createdTask = await _service.CreateTaskAsync(dto);
+
             return CreatedAtAction(nameof(GetById), new { id = createdTask.Id }, createdTask);
         }
         catch (Exception ex)
@@ -43,8 +46,8 @@ public class TaskController : ControllerBase
                 inner = ex.InnerException?.Message
             });
         }
-
     }
+
 
 
     [HttpPut("{id}")]

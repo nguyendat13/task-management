@@ -315,5 +315,68 @@ namespace taskmanager.Services.Implementations
             await _context.SaveChangesAsync();
         }
 
+
+
+
+        public async Task NotifyLeaderTaskProgressChangedAsync(int taskId, int userId, string status)
+
+        {
+            var task = await _context.Tasks
+                .Include(t => t.Group)
+                .FirstOrDefaultAsync(t => t.Id == taskId);
+
+            if (task?.GroupId == null) return;
+
+            var leaderId = await _context.GroupItemUsers
+                .Where(g => g.GroupId == task.GroupId && g.IsLeader)
+                .Select(g => g.UserId)
+                .FirstOrDefaultAsync();
+
+            if (leaderId == 0 || leaderId == userId) return;
+
+            var user = await _context.Users.FindAsync(userId);
+
+            var notification = new Notification
+            {
+                UserId = leaderId,
+                TaskId = taskId,
+                GroupId = task.GroupId,
+                Message = $"Thành viên '{user?.Username}' đã cập nhật tiến độ '{status}' cho công việc '{task?.Title}'.",
+                Type = NotificationType.TaskAssigned,
+                Status = NotificationStatus.None,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow
+            };
+
+            _context.Notifications.Add(notification);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task NotifyTaskCreatedToGroupAsync(int groupId, int taskId, string taskTitle, int creatorUserId)
+        {
+            var groupMembers = await _context.GroupItemUsers
+                .Where(g => g.GroupId == groupId && g.UserId != creatorUserId)
+                .ToListAsync();
+
+            foreach (var member in groupMembers)
+            {
+                var notification = new Notification
+                {
+                    UserId = member.UserId,
+                    GroupId = groupId,
+                    TaskId = taskId,
+                    Message = $"Công việc mới '{taskTitle}' vừa được tạo trong nhóm {groupId}.",
+                    Type = NotificationType.TaskAssigned,
+                    Status = NotificationStatus.None,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+
+                _context.Notifications.Add(notification);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

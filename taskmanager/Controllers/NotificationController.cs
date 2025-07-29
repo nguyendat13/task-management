@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using taskmanager.DTOs.Group;
+using taskmanager.DTOs.Notifications;
 using taskmanager.Services;
 
 namespace taskmanager.Controllers
@@ -60,5 +61,36 @@ namespace taskmanager.Controllers
             await _notificationService.MarkAsReadAsync(notificationId);
             return NoContent();
         }
+
+        //// POST: api/Notification/task-progress
+        //[HttpPost("task-progress")]
+        //public async Task<IActionResult> NotifyLeaderTaskProgressChanged([FromBody] TaskProgressNotificationDTO request)
+        //{
+        //    try
+        //    {
+        //        await _notificationService.NotifyLeaderTaskProgressChangedAsync(request.TaskId, request.UserId);
+        //        return Ok(new { message = "Đã gửi thông báo cập nhật tiến độ." });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new { message = ex.Message });
+        //    }
+        //}
+
+        //// POST: api/Notification/task-created
+        //[HttpPost("task-created")]
+        //public async Task<IActionResult> NotifyTaskCreatedToGroup([FromBody] TaskCreatedNotificationDTO request)
+        //{
+        //    try
+        //    {
+        //        await _notificationService.NotifyTaskCreatedToGroupAsync(request.GroupId, request.TaskId, request.TaskTitle, request.CreatorUserId);
+        //        return Ok(new { message = "Đã gửi thông báo tạo công việc mới đến nhóm." });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(new { message = ex.Message });
+        //    }
+        //}
+
     }
 }

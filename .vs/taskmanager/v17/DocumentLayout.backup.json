@@ -3,16 +3,36 @@
   "WorkspaceRootPath": "D:\\projects\\.net\\taskmanager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\taskassigneecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\taskassigneecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\dtos\\message\\messagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\dtos\\message\\messagedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\taskassigneeserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\taskassigneeserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\itaskassigneeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\itaskassigneeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\messagecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\groupitemusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\groupitemusercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\controllers\\groupcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\impl\\messageserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\impl\\messageserviceimpl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|d:\\projects\\.net\\taskmanager\\taskmanager\\services\\imessageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1635E94C-F88C-4563-B5CF-DC3E6C2145F3}|taskmanager\\taskmanager.csproj|solutionrelative:taskmanager\\services\\imessageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,45 +42,110 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TaskAssigneeController.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskAssigneeController.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Controllers\\TaskAssigneeController.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\TaskAssigneeController.cs",
-              "RelativeToolTip": "taskmanager\\Controllers\\TaskAssigneeController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAkwCIAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Program.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Program.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Program.cs",
+              "RelativeToolTip": "taskmanager\\Program.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAACwAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T18:04:40.377Z",
+              "WhenOpened": "2025-07-28T14:52:09.416Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TaskAssigneeServiceImpl.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
-              "RelativeToolTip": "taskmanager\\Services\\impl\\TaskAssigneeServiceImpl.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAwCwAAAAtAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "MessageDTO.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\DTOs\\Message\\MessageDTO.cs",
+              "RelativeDocumentMoniker": "taskmanager\\DTOs\\Message\\MessageDTO.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\DTOs\\Message\\MessageDTO.cs",
+              "RelativeToolTip": "taskmanager\\DTOs\\Message\\MessageDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T18:04:03.361Z",
+              "WhenOpened": "2025-07-28T14:51:42.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GroupController.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\GroupController.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Controllers\\GroupController.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\GroupController.cs",
+              "RelativeToolTip": "taskmanager\\Controllers\\GroupController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T14:26:58.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GroupItemUserController.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\GroupItemUserController.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Controllers\\GroupItemUserController.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\GroupItemUserController.cs",
+              "RelativeToolTip": "taskmanager\\Controllers\\GroupItemUserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T14:26:29.607Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MessageController.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\MessageController.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Controllers\\MessageController.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Controllers\\MessageController.cs",
+              "RelativeToolTip": "taskmanager\\Controllers\\MessageController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA4wB4AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T14:26:16.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MessageServiceImpl.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\MessageServiceImpl.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Services\\impl\\MessageServiceImpl.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\impl\\MessageServiceImpl.cs",
+              "RelativeToolTip": "taskmanager\\Services\\impl\\MessageServiceImpl.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T14:25:12.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "IMessageService.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\IMessageService.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Services\\IMessageService.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\IMessageService.cs",
+              "RelativeToolTip": "taskmanager\\Services\\IMessageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-28T14:22:51.502Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ITaskAssigneeService.cs",
-              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\ITaskAssigneeService.cs",
-              "RelativeDocumentMoniker": "taskmanager\\Services\\ITaskAssigneeService.cs",
-              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Services\\ITaskAssigneeService.cs",
-              "RelativeToolTip": "taskmanager\\Services\\ITaskAssigneeService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Title": "Message.cs",
+              "DocumentMoniker": "D:\\projects\\.net\\taskmanager\\taskmanager\\Models\\Message.cs",
+              "RelativeDocumentMoniker": "taskmanager\\Models\\Message.cs",
+              "ToolTip": "D:\\projects\\.net\\taskmanager\\taskmanager\\Models\\Message.cs",
+              "RelativeToolTip": "taskmanager\\Models\\Message.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAxwCIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T18:03:55.466Z",
+              "WhenOpened": "2025-07-24T15:05:40.768Z",
               "EditorCaption": ""
             }
           ]

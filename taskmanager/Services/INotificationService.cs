@@ -15,5 +15,9 @@ namespace taskmanager.Services
         Task RejectNotificationAsync(int notificationId);
         Task SendNotificationAsync(Notification notification);
         Task SendJoinGroupRequestNotificationAsync(int leaderUserId, int groupId, int requestUserId);
+
+        Task NotifyLeaderTaskProgressChangedAsync(int taskId, int userId, string status);
+
+        Task NotifyTaskCreatedToGroupAsync(int groupId, int taskId, string taskTitle, int creatorUserId);
     }
 }
