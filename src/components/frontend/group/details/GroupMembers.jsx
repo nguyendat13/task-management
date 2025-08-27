@@ -30,28 +30,26 @@ const GroupMembers = () => {
     return <p className="text-white text-center mt-10">Không có thành viên nào.</p>;
 
   return (
-    <div className="relative min-h-screen text-white">
-      <div className="max-w-5xl mx-auto py-12 px-6">
-        <div className="mb-6">
+    <div className="min-h-screen bg-gray-900 text-gray-100 py-10 px-4">
+      <div className="max-w-3xl mx-auto">
+        <div className="mb-8 flex items-center">
           <button
             onClick={() => navigate(-1)}
-            className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded shadow transition"
+            className="px-4 py-2 bg-gray-800 border border-gray-700 hover:bg-gray-700 text-gray-100 rounded-lg shadow-sm transition"
           >
             &larr; Quay lại
           </button>
         </div>
 
-        <h2 className="text-3xl font-bold text-center text-orange-400 mb-8">
-          Danh sách thành viên
-        </h2>
+        <h2 className="text-2xl font-bold text-blue-300 mb-8 text-center">Danh sách thành viên</h2>
 
         <div className="grid md:grid-cols-2 gap-6">
           {members.map((member) => (
             <div
               key={member.userId}
-              className="bg-gray-800 border border-gray-700 rounded-lg p-6 shadow-md hover:shadow-orange-500 transition duration-300"
+              className="bg-gray-800 border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-blue-400 transition duration-300"
             >
-              <h3 className="text-xl font-semibold text-orange-300">{member.userName}</h3>
+              <h3 className="text-xl font-semibold text-blue-200">{member.userName}</h3>
               <p className="text-gray-400 mt-2">
                 Vai trò:{" "}
                 <span className={member.isLeader ? "text-yellow-400" : "text-green-400"}>
@@ -59,7 +57,7 @@ const GroupMembers = () => {
                 </span>
               </p>
               {member.userId === currentUserId && (
-                <p className="mt-2 text-sm text-blue-300 italic">Bạn</p>
+                <p className="mt-2 text-sm text-blue-400 italic">Bạn</p>
               )}
             </div>
           ))}

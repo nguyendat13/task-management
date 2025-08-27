@@ -79,12 +79,12 @@ const AddGroupTask = () => {
   const today = new Date().toISOString().split("T")[0];
 
   return (
-    <div className="flex justify-center items-center min-h-[80vh]">
+    <div className="flex justify-center items-center min-h-[80vh] bg-gray-900">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full space-y-6"
+        className="bg-gray-800 p-10 rounded-2xl shadow-2xl max-w-lg w-full space-y-7 border border-gray-700"
       >
-        <h2 className="text-2xl text-orange-400 font-bold text-center">
+        <h2 className="text-2xl text-blue-300 font-bold text-center mb-4">
           Thêm công việc {groupId ? "trong nhóm" : "mới"}
         </h2>
 
@@ -93,7 +93,7 @@ const AddGroupTask = () => {
           placeholder="Tiêu đề"
           value={form.title}
           onChange={handleChange}
-          className="w-full p-3 rounded border border-gray-600 bg-gray-900 text-white"
+          className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         />
         <input
@@ -101,7 +101,7 @@ const AddGroupTask = () => {
           placeholder="Mô tả ngắn"
           value={form.description}
           onChange={handleChange}
-          className="w-full p-3 rounded border border-gray-600 bg-gray-900 text-white"
+          className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <textarea
           name="detail"
@@ -109,12 +109,12 @@ const AddGroupTask = () => {
           value={form.detail}
           onChange={handleChange}
           rows={5}
-          className="w-full p-3 rounded border border-gray-600 bg-gray-900 text-white"
+          className="w-full px-4 py-3 rounded-xl border border-gray-600 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <div className="flex space-x-4">
           <div className="flex-1">
-            <label className="block mb-1 text-gray-300">Ngày</label>
+            <label className="block mb-1 text-gray-300 font-medium">Ngày</label>
             <input
               type="date"
               name="dueDate"
@@ -122,32 +122,31 @@ const AddGroupTask = () => {
               onChange={handleChange}
               min={today}
               required
-              className="w-full p-2 rounded border border-gray-600 bg-gray-900 text-white"
+              className="w-full px-3 py-2 rounded-xl border border-gray-600 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div className="flex-1">
-            <label className="block mb-1 text-gray-300">Giờ</label>
+            <label className="block mb-1 text-gray-300 font-medium">Giờ</label>
             <input
               type="time"
               name="dueTime"
               value={form.dueTime}
               onChange={handleChange}
               required
-              className="w-full p-2 rounded border border-gray-600 bg-gray-900 text-white"
+              className="w-full px-3 py-2 rounded-xl border border-gray-600 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
         </div>
 
-
-      {/* 👇 Chọn người được giao nhiệm vụ */}
+        {/* 👇 Chọn người được giao nhiệm vụ */}
         {groupId && (
           <div>
-            <label className="block mb-1 text-gray-300">Giao cho:</label>
+            <label className="block mb-1 text-gray-300 font-medium">Giao cho:</label>
             <select
               name="assigneeId"
               value={form.assigneeId}
               onChange={handleChange}
-              className="w-full p-2 rounded border border-gray-600 bg-gray-900 text-white"
+              className="w-full px-3 py-2 rounded-xl border border-gray-600 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             >
               <option value="">-- Chọn thành viên --</option>
@@ -160,30 +159,29 @@ const AddGroupTask = () => {
           </div>
         )}
 
-
         {/* 👇 Tệp đính kèm */}
         <div>
-          <label className="block mb-1 text-gray-300">Tệp đính kèm:</label>
+          <label className="block mb-1 text-gray-300 font-medium">Tệp đính kèm:</label>
           <input
             type="file"
             name="attachment"
             accept=".pdf,.doc,.docx,.xlsx,.xls,.png,.jpg,.jpeg,.txt,.sql"
             onChange={handleChange}
-            className="text-white"
+            className="text-gray-100 file:bg-blue-600 file:text-white file:rounded-lg file:px-3 file:py-1 file:border-0"
           />
         </div>
 
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-6">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="bg-gray-600 px-5 py-2 rounded hover:bg-gray-700 text-white"
+            className="bg-gray-700 hover:bg-gray-600 px-6 py-2 rounded-xl text-white shadow"
           >
             Quay lại
           </button>
           <button
             type="submit"
-            className="bg-orange-500 px-5 py-2 rounded hover:bg-orange-600 text-white font-semibold"
+            className="bg-orange-600 hover:bg-orange-700 px-6 py-2 rounded-xl text-white font-semibold shadow"
           >
             Tạo
           </button>

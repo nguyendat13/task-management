@@ -36,14 +36,14 @@ const GroupTasks = () => {
   };
 
   if (loading)
-    return <p className="text-white text-center mt-10">Đang tải dữ liệu...</p>;
+  return <p className="text-gray-100 text-center mt-10">Đang tải dữ liệu...</p>;
 
   if (!tasks || tasks.length === 0)
     return (
-      <div className="min-h-screen text-white p-6">
+      <div className="min-h-screen bg-gray-900 text-gray-100 p-6">
         <button
           onClick={() => navigate(`/chi-tiet-nhom/${groupId}/thanh-vien`)}
-          className="mb-6 bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded"
+          className="mb-6 bg-gray-800 border border-gray-700 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded-lg shadow-sm"
         >
           &larr; Quay lại thành viên
         </button>
@@ -52,19 +52,19 @@ const GroupTasks = () => {
     );
 
   return (
-    <div className="min-h-screen text-white p-6">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen bg-gray-900 text-gray-100 p-6">
+      <div className="max-w-3xl mx-auto">
         {/* Nút quay lại */}
-        <div className="mb-6">
+        <div className="mb-8 flex items-center">
           <button
             onClick={() => navigate(`/chi-tiet-nhom/${groupId}/thanh-vien`)}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded shadow"
+            className="bg-gray-800 border border-gray-700 hover:bg-gray-700 text-gray-100 px-4 py-2 rounded-lg shadow-sm"
           >
             &larr; Quay lại thành viên
           </button>
         </div>
 
-        <h2 className="text-3xl font-bold text-center text-orange-400 mb-8">
+        <h2 className="text-2xl font-bold text-blue-300 mb-8 text-center">
           Danh sách công việc nhóm
         </h2>
 
@@ -72,10 +72,10 @@ const GroupTasks = () => {
           {tasks.map((task) => (
             <div
               key={task.id}
-              className="bg-gray-800 border border-gray-700 rounded-lg p-6 shadow-md hover:shadow-orange-500 transition duration-300"
+              className="bg-gray-800 border border-gray-700 rounded-2xl p-6 shadow-lg hover:shadow-blue-400 transition duration-300"
             >
               <div className="mb-4">
-                <h3 className="text-xl font-semibold text-orange-300">{task.taskTitle}</h3>
+                <h3 className="text-xl font-semibold text-blue-200">{task.taskTitle}</h3>
                 <p className="mt-2 text-gray-300">{task.description}</p>
               </div>
 

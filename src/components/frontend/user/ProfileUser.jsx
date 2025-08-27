@@ -119,58 +119,58 @@ const ProfileUser = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-6">
-      <div className="bg-white shadow-md rounded-lg p-8 max-w-md w-full">
-        <h2 className="text-3xl font-semibold mb-6 text-center">Thông tin tài khoản</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 p-6">
+      <div className="bg-gray-800 shadow-md rounded-2xl p-8 max-w-md w-full text-gray-100">
+        <h2 className="text-3xl font-semibold mb-6 text-center text-blue-300">Thông tin tài khoản</h2>
 
-        <label className="block mb-2 font-medium text-gray-700">Họ và tên</label>
+        <label className="block mb-2 font-medium text-gray-200">Họ và tên</label>
         <input
           type="text"
-          className="border rounded-md p-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border border-gray-700 rounded-md p-2 mb-4 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Họ và tên"
           value={formData.name}
           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         />
 
-        <label className="block mb-2 font-medium text-gray-700">Tên đăng nhập</label>
+        <label className="block mb-2 font-medium text-gray-200">Tên đăng nhập</label>
         <input
           type="text"
-          className="border rounded-md p-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border border-gray-700 rounded-md p-2 mb-4 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Tên đăng nhập"
           value={formData.username}
           onChange={(e) => setFormData({ ...formData, username: e.target.value })}
         />
 
-        <label className="block mb-2 font-medium text-gray-700">Email</label>
+        <label className="block mb-2 font-medium text-gray-200">Email</label>
         <input
           type="email"
-          className="border rounded-md p-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border border-gray-700 rounded-md p-2 mb-4 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Email"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
 
-        <label className="block mb-2 font-medium text-gray-700">Số điện thoại</label>
+        <label className="block mb-2 font-medium text-gray-200">Số điện thoại</label>
         <input
           type="tel"
-          className="border rounded-md p-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border border-gray-700 rounded-md p-2 mb-4 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Số điện thoại"
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
         />
 
-        <label className="block mb-2 font-medium text-gray-700">Địa chỉ</label>
+        <label className="block mb-2 font-medium text-gray-200">Địa chỉ</label>
         <input
           type="text"
-          className="border rounded-md p-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border border-gray-700 rounded-md p-2 mb-4 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="Địa chỉ"
           value={formData.address}
           onChange={(e) => setFormData({ ...formData, address: e.target.value })}
         />
 
-        <label className="block mb-2 font-medium text-gray-700">Giới tính</label>
+        <label className="block mb-2 font-medium text-gray-200">Giới tính</label>
         <select
-          className="border rounded-md p-2 mb-6 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+          className="border border-gray-700 rounded-md p-2 mb-6 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
           value={formData.gender}
           onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
         >
@@ -187,28 +187,28 @@ const ProfileUser = () => {
           Cập nhật thông tin
         </button>
 
-        <h3 className="text-xl font-semibold mb-4">Đổi mật khẩu</h3>
+        <h3 className="text-xl font-semibold mb-4 text-blue-300">Đổi mật khẩu</h3>
 
         <input
           type="password"
           placeholder="Mật khẩu hiện tại"
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
-          className="border rounded-md p-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-red-400"
+          className="border border-gray-700 rounded-md p-2 mb-4 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-red-400"
         />
         <input
           type="password"
           placeholder="Mật khẩu mới"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
-          className="border rounded-md p-2 mb-4 w-full focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="border border-gray-700 rounded-md p-2 mb-4 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400"
         />
         <input
           type="password"
           placeholder="Xác nhận mật khẩu mới"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className="border rounded-md p-2 mb-6 w-full focus:outline-none focus:ring-2 focus:ring-green-400"
+          className="border border-gray-700 rounded-md p-2 mb-6 w-full bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400"
         />
         <button
           onClick={handleChangePassword}
@@ -218,7 +218,7 @@ const ProfileUser = () => {
         </button>
 
         {message && (
-          <p className="mt-4 text-center text-red-600 font-medium">{message}</p>
+          <p className="mt-4 text-center text-red-400 font-medium">{message}</p>
         )}
       </div>
     </div>

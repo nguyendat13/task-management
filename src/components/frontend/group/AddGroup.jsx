@@ -43,19 +43,19 @@ const AddGroup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-[80vh]">
+    <div className="flex justify-center items-center min-h-[80vh] bg-gray-900">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full space-y-6"
+        className="bg-gray-800 p-8 rounded-2xl shadow-lg max-w-md w-full space-y-6 text-gray-100"
       >
-        <h2 className="text-2xl text-orange-400 font-bold text-center">Tạo Nhóm Mới</h2>
+        <h2 className="text-2xl text-blue-300 font-bold text-center">Tạo Nhóm Mới</h2>
 
         <input
           name="name"
           placeholder="Tên nhóm"
           value={form.name}
           onChange={handleChange}
-          className="w-full p-3 rounded border border-gray-600 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full p-3 rounded border border-gray-700 bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         />
 
@@ -64,7 +64,7 @@ const AddGroup = () => {
           placeholder="Nhiệm vụ của nhóm"
           value={form.duty}
           onChange={handleChange}
-          className="w-full p-3 rounded border border-gray-600 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full p-3 rounded border border-gray-700 bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           rows={4}
           required
         ></textarea>
@@ -73,13 +73,13 @@ const AddGroup = () => {
           <button
             type="button"
             onClick={() => navigate("/")}
-            className="bg-gray-600 px-5 py-2 rounded hover:bg-gray-700 transition text-white"
+            className="bg-gray-700 px-5 py-2 rounded hover:bg-gray-600 transition text-gray-100"
           >
             Quay lại
           </button>
           <button
             type="submit"
-            className="bg-orange-500 px-5 py-2 rounded hover:bg-orange-600 transition text-white font-semibold"
+            className="bg-blue-500 px-5 py-2 rounded hover:bg-blue-600 transition text-white font-semibold"
           >
             Tạo
           </button>

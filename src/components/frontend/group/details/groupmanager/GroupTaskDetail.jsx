@@ -117,21 +117,21 @@ const handlePreviewFile = async (type) => {
   if (!task) return <p className="text-center text-white mt-6">Không tìm thấy công việc.</p>;
 
   return (
-    <div className="max-w-2xl mx-auto bg-gray-900 text-white p-6 rounded-lg mt-10 shadow-lg">
-      <h2 className="text-2xl font-bold text-orange-400 mb-4">Chi tiết công việc nhóm</h2>
+  <div className="max-w-2xl mx-auto bg-gray-900 text-gray-100 p-8 rounded-2xl mt-10 shadow-2xl border border-gray-800">
+  <h2 className="text-2xl font-bold text-blue-300 mb-8 text-center">Chi tiết công việc nhóm</h2>
 
-      <label className="block mt-3 text-sm">Tiêu đề:</label>
+      <label className="block mt-3 text-sm font-medium">Tiêu đề:</label>
       <input
         type="text"
         name="title"
         value={task.title || ""}
         onChange={handleChange}
         disabled={!isLeader}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
+        className="w-full mt-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       
       <div className="mt-2 text-sm text-gray-300">
-        <span className="font-semibold text-white">Thành viên được giao:</span>{" "}
+        <span className="font-semibold text-gray-100">Thành viên được giao:</span>{" "}
         {assignees.length > 0 ? (
           assignees.map((a) => a.name).join(", ")
         ) : (
@@ -139,68 +139,68 @@ const handlePreviewFile = async (type) => {
         )}
       </div>
 
-      <label className="block mt-3 text-sm">Mô tả:</label>
+      <label className="block mt-3 text-sm font-medium">Mô tả:</label>
       <textarea
         name="description"
         value={task.description || ""}
         onChange={handleChange}
         disabled={!isLeader}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
+        className="w-full mt-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
-      <label className="block mt-3 text-sm">Chi tiết:</label>
+      <label className="block mt-3 text-sm font-medium">Chi tiết:</label>
       <textarea
         name="detail"
         value={task.detail || ""}
         onChange={handleChange}
         disabled={!isLeader}
         rows={4}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
+        className="w-full mt-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
           {isLeader && (
         <>
-          <label className="block mt-3 text-sm">Tệp đính kèm (nhóm trưởng tải lên):</label>
+          <label className="block mt-3 text-sm font-medium">Tệp đính kèm (nhóm trưởng tải lên):</label>
           <input
             type="file"
             name="attachment"
             onChange={(e) =>
               setTask((prev) => ({ ...prev, attachment: e.target.files[0] }))
             }
-            className="text-white"
+            className="text-gray-100 file:bg-blue-600 file:text-white file:rounded-lg file:px-3 file:py-1 file:border-0"
           />
         </>
       )}
       <button
-          onClick={() =>
-            task.attachmentPath
-              ? handlePreviewFile("attachment")
-              : alert("Không có tệp đính kèm để xem.")
-          }
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
-        >
-          📎 Xem tệp đính kèm
-        </button>
+        onClick={() =>
+          task.attachmentPath
+            ? handlePreviewFile("attachment")
+            : alert("Không có tệp đính kèm để xem.")
+        }
+        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mt-2 shadow"
+      >
+        📎 Xem tệp đính kèm
+      </button>
 
 
 
-      <label className="block mt-3 text-sm">Hạn chót:</label>
+      <label className="block mt-3 text-sm font-medium">Hạn chót:</label>
       <input
         type="datetime-local"
         name="dueDate"
         value={task.dueDate?.slice(0, 16) || ""}
         onChange={handleChange}
         disabled={!isLeader}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
+        className="w-full mt-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
 
-      <label className="block mt-3 text-sm">Tiến độ:</label>
+      <label className="block mt-3 text-sm font-medium">Tiến độ:</label>
       <select
         name="workProgressId"
         value={task.workProgressId || ""}
         onChange={handleChange}
-        disabled={!isLeader && !isAssignee} // ✅ chỉ leader hoặc được giao mới chỉnh sửa
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
+        disabled={!isLeader && !isAssignee}
+        className="w-full mt-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         {progressList.map((p) => {
     // Nếu không phải leader => chỉ cho chọn tiến độ 2 hoặc 3
@@ -214,73 +214,73 @@ const handlePreviewFile = async (type) => {
       </select>
 
      {isAssignee && (
-  <>
-    <label className="block mt-3 text-sm">Nộp bài (dành cho người được giao):</label>
-    <input
-      type="file"
-      name="submission"
-      onChange={(e) =>
-        setTask((prev) => ({ ...prev, submission: e.target.files[0] }))
-      }
-      className="text-white"
-    />
-  </>
-)}
+      <>
+        <label className="block mt-3 text-sm font-medium">Nộp bài (dành cho người được giao):</label>
+        <input
+          type="file"
+          name="submission"
+          onChange={(e) =>
+            setTask((prev) => ({ ...prev, submission: e.target.files[0] }))
+          }
+          className="text-gray-100 file:bg-green-600 file:text-white file:rounded-lg file:px-3 file:py-1 file:border-0"
+        />
+      </>
+    )}
 
-       <button
+      <button
         onClick={() =>
           task.submissionFilePath
             ? handlePreviewFile("submission")
             : alert("Không có bài nộp để xem.")
         }
-        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded"
+        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg mt-2 shadow"
       >
         📄 Xem bài nộp
       </button>
 
     {previewUrl && previewFileName && (
-      <div className="mt-6 bg-gray-800 p-4 rounded shadow">
+      <div className="mt-8 bg-gray-800 p-6 rounded-2xl shadow-lg">
         <div className="flex justify-between items-center mb-3">
-          <h3 className="text-white font-semibold">Xem trước tệp: {previewFileName}</h3>
+          <h3 className="text-gray-100 font-semibold">Xem trước tệp: {previewFileName}</h3>
           <a
             href={previewUrl}
             download={previewFileName}
-            className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded text-sm"
+            className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1 rounded-lg text-sm"
           >
             Tải xuống
           </a>
         </div>
 
-    {/\.(pdf)$/i.test(previewFileName) ? (
-      <iframe
-        src={previewUrl}
-        title="Preview PDF"
-        className="w-full h-[500px] border rounded"
-      />
-    ) : /\.(png|jpg|jpeg|gif)$/i.test(previewFileName) ? (
-      <img
-        src={previewUrl}
-        alt="Preview"
-        className="max-w-full h-auto rounded border"
-      />
-    ) : (
-      <div className="text-gray-300 italic">
-        Không hỗ trợ xem trước định dạng này. Vui lòng tải về để xem.
+        {/\.(pdf)$/i.test(previewFileName) ? (
+          <iframe
+            src={previewUrl}
+            title="Preview PDF"
+            className="w-full h-[500px] border rounded-xl"
+          />
+        ) : /\.(png|jpg|jpeg|gif)$/i.test(previewFileName) ? (
+          <img
+            src={previewUrl}
+            alt="Preview"
+            className="max-w-full h-auto rounded-xl border"
+          />
+        ) : (
+          <div className="text-gray-300 italic">
+            Không hỗ trợ xem trước định dạng này. Vui lòng tải về để xem.
+          </div>
+        )}
       </div>
     )}
-  </div>
-)}
 
-      <div className="flex justify-end mt-6 space-x-2">
+      <div className="flex justify-end mt-8 space-x-3">
         <button
           onClick={() => navigate(`/nhom/${groupId}`)}
-          className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-white"
+          className="bg-gray-700 hover:bg-gray-600 px-5 py-2 rounded-lg text-white shadow"
         >
           Quay lại
         </button>
         <button
           onClick={handleUpdate}
-          className="bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded text-white"
+          className="bg-orange-600 hover:bg-orange-700 px-5 py-2 rounded-lg text-white shadow font-semibold"
         >
           Lưu thay đổi
         </button>

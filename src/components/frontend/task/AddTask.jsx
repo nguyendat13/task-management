@@ -53,19 +53,19 @@ const AddTask = ({ onTaskCreated }) => {
   const today = new Date().toISOString().split("T")[0];
 
   return (
-    <div className="flex justify-center items-center min-h-[80vh]">
+    <div className="flex justify-center items-center min-h-[80vh] bg-gray-900">
       <form
         onSubmit={handleSubmit}
-        className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full space-y-6"
+        className="bg-gray-800 p-8 rounded-2xl shadow-lg max-w-md w-full space-y-6 text-gray-100"
       >
-        <h2 className="text-2xl text-orange-400 font-bold text-center">Thêm công việc mới</h2>
+        <h2 className="text-2xl text-blue-300 font-bold text-center">Thêm công việc mới</h2>
 
         <input
           name="title"
           placeholder="Tiêu đề"
           value={form.title}
           onChange={handleChange}
-          className="w-full p-3 rounded border border-gray-600 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full p-3 rounded border border-gray-700 bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         />
         <input
@@ -73,14 +73,14 @@ const AddTask = ({ onTaskCreated }) => {
           placeholder="Mô tả ngắn"
           value={form.description}
           onChange={handleChange}
-          className="w-full p-3 rounded border border-gray-600 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full p-3 rounded border border-gray-700 bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <textarea
           name="detail"
           placeholder="Chi tiết"
           value={form.detail}
           onChange={handleChange}
-          className="w-full p-3 rounded border border-gray-600 bg-gray-900 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full p-3 rounded border border-gray-700 bg-gray-900 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400"
           rows={5}
         ></textarea>
 
@@ -92,7 +92,7 @@ const AddTask = ({ onTaskCreated }) => {
               name="dueDate"
               value={form.dueDate}
               onChange={handleChange}
-              className="w-full p-2 rounded border border-gray-600 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full p-2 rounded border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
               min={today}
               required
             />
@@ -104,7 +104,7 @@ const AddTask = ({ onTaskCreated }) => {
               name="dueTime"
               value={form.dueTime}
               onChange={handleChange}
-              className="w-full p-2 rounded border border-gray-600 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full p-2 rounded border border-gray-700 bg-gray-900 text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
               required
             />
           </div>
@@ -114,13 +114,13 @@ const AddTask = ({ onTaskCreated }) => {
           <button
             type="button"
              onClick={() => navigate("/")}
-            className="bg-gray-600 px-5 py-2 rounded hover:bg-gray-700 transition"
+            className="bg-gray-700 px-5 py-2 rounded hover:bg-gray-600 transition text-gray-100"
           >
             Quay lại
           </button>
           <button
             type="submit"
-            className="bg-orange-500 px-5 py-2 rounded hover:bg-orange-600 transition text-white font-semibold"
+            className="bg-blue-500 px-5 py-2 rounded hover:bg-blue-600 transition text-white font-semibold"
           >
             Tạo
           </button>

@@ -9,10 +9,10 @@ const Header = () => {
   const userId = getUserIdFromLocalStorage();
 
   return (
-    <header className="relative z-50 text-white p-4 shadow-lg">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-4xl font-bold text-center w-full">Quản lý công việc</Link>
-        <div className="flex items-center space-x-4">
+    <header className="relative z-50 bg-gray-900 border-b border-gray-800 py-3 px-2 shadow-sm">
+      <div className="max-w-5xl mx-auto flex justify-between items-center">
+        <Link to="/" className="text-2xl font-bold text-blue-300 tracking-tight">Todo Task App</Link>
+        <div className="flex items-center space-x-3 text-gray-100">
           <NotificationIcon userId={userId} />
           <UserMenu />
         </div>

@@ -12,7 +12,7 @@ const TaskPage =()=> {
           {!menuOpen && (
             <button
               onClick={() => setMenuOpen(true)}
-              className="absolute top-6 left-8 z-20 bg-orange-500 text-white p-3 rounded-full shadow-lg hover:bg-orange-600 transition-all"
+              className="top-8 left-[10] z-20 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all"
             >
               <FontAwesomeIcon icon={faBars} className="w-6 h-6" />
             </button>

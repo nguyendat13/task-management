@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import NotificationService from '../../../services/NotificationService';
 import { useNavigate } from 'react-router-dom';
+import TaskService from '../../../services/TaskService';
 
 const NotificationTypeMap = {
   0: "InviteToGroup",
@@ -55,29 +56,48 @@ const NotificationIcon = ({ userId }) => {
     fetchNotifications();
   };
 
-  const handleClickNotification = async (n) => {
-    if (!n.wasRead) {
-      await NotificationService.markAsRead(n.id);
-    }
+ const handleClickNotification = async (n) => {
+  if (!n.wasRead) {
+    await NotificationService.markAsRead(n.id);
+  }
 
-    const type = NotificationTypeMap[n.type];
-    setShowList(false); // Ẩn danh sách sau khi click
+  const type = NotificationTypeMap[n.type];
+  setShowList(false);
 
-    switch (type) {
-      case "InviteToGroup":
-        navigate("/danh-sach-nhom");
-        break;
-      case "TaskAssigned":
-        if (n.taskId)
-          navigate(`/cong-viec/${n.taskId}`);
-        break;
-      case "Message":
-        navigate("/danh-sach-nhom");
-        break;
-      default:
-        navigate("/");
-    }
-  };
+  switch (type) {
+    case "InviteToGroup":
+      navigate("/danh-sach-nhom");
+      break;
+
+    case "TaskAssigned":
+      if (n.taskId) {
+        if (!n.groupId) {
+          try {
+            const task = await TaskService.getTaskById(n.taskId);
+            if (task?.groupId) {
+              navigate(`/nhom/${task.groupId}/cong-viec/${n.taskId}`);
+            } else {
+              alert("Không tìm thấy groupId cho công việc này.");
+            }
+          } catch (err) {
+            alert("Lỗi khi lấy thông tin công việc.");
+            console.error(err);
+          }
+        } else {
+          navigate(`/nhom/${n.groupId}/cong-viec/${n.taskId}`);
+        }
+      }
+      break;
+
+    case "Message":
+      navigate("/danh-sach-nhom");
+      break;
+
+    default:
+      navigate("/");
+  }
+};
+
 
   useEffect(() => {
     if (!userId) return;

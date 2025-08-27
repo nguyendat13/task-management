@@ -138,47 +138,28 @@ const handleViewDetail = async (taskId) => {
   };
 
   return (
-    <div className="min-h-screen text-white py-10 px-6">
-      <div className="max-w-5xl mx-auto">
-       <div className="flex justify-between items-center mt-4">
-        <button
-          onClick={() => navigate("/danh-sach-nhom")}
-          className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded shadow transition"
-        >
-          &larr; Quay lại
-        </button>
-
-        <button
-          onClick={handleLeaveGroup}
-          className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded shadow"
-        >
-          Rời nhóm
-        </button>
-      </div>
-
-
-        <div className="flex justify-between mt-4">
-          {isLeader && (
-            <button
-              onClick={handleAddMember}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded shadow"
-            >
-              + Thêm thành viên
-            </button>
-          )}
-         
+    <div className="min-h-screen bg-gray-900 text-gray-100 py-10 px-4">
+      <div className="max-w-2xl mx-auto">
+        <div className="flex justify-between items-center mb-6">
+          <button
+            onClick={() => navigate("/danh-sach-nhom")}
+            className="px-4 py-2 bg-gray-800 border border-gray-700 hover:bg-gray-700 text-gray-100 rounded-lg shadow-sm transition"
+          >
+            &larr; Quay lại
+          </button>
+          <button
+            onClick={handleLeaveGroup}
+            className="bg-gray-700 hover:bg-gray-600 text-gray-100 px-4 py-2 rounded-lg shadow-sm"
+          >
+            Rời nhóm
+          </button>
         </div>
 
-        <h1 className="text-3xl font-bold text-orange-400 mb-8 text-center">
-          Chi tiết nhóm
-        </h1>
+        <h1 className="text-2xl font-bold text-blue-300 mb-8 text-center">Chi tiết nhóm</h1>
 
         {groupInfo && (
-          <p className="text-center text-gray-300 mb-6">
-            Mã nhóm:{" "}
-            <span className="text-white font-semibold">{groupInfo.groupCode}</span>{" "}
-            - Tên nhóm:{" "}
-            <span className="text-white font-semibold">{groupInfo.name}</span>
+          <p className="text-center text-gray-400 mb-6">
+            Mã nhóm: <span className="text-gray-100 font-semibold">{groupInfo.groupCode}</span> - Tên nhóm: <span className="text-gray-100 font-semibold">{groupInfo.name}</span>
           </p>
         )}
 
@@ -199,21 +180,19 @@ const handleViewDetail = async (taskId) => {
         {loading ? (
           <p className="text-center">Đang tải dữ liệu...</p>
         ) : activeTab === "members" ? (
-          <div className="bg-gray-800 p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4">Danh sách thành viên</h2>
-            <ul className="space-y-2">
-              {members.map((m) => (
-                <li
-                  key={m.userId}
-                  className="bg-gray-700 p-3 rounded flex justify-between items-center"
-                >
-                  <span>
-                    {m.userName}{" "}
-                    {m.isLeader && <span className="text-yellow-400">(Nhóm trưởng)</span>}
-                  </span>
-                {isLeader ? (
-                    currentUserId !== m.userId && (
-                      
+          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg mb-8">
+            <h2 className="text-xl font-semibold text-blue-200 mb-4">Danh sách thành viên</h2>
+            <ul className="space-y-3">
+              {members.length > 0 ? (
+                members.map((m) => (
+                  <li key={m.userId} className="bg-gray-700 p-4 rounded-lg flex justify-between items-center shadow">
+                    <div className="flex items-center gap-3">
+                      <span className="font-medium text-gray-100">{m.userName}</span>
+                      {m.isLeader && (
+                        <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-xs text-gray-900 rounded-full font-semibold">Leader</span>
+                      )}
+                    </div>
+                    {isLeader && currentUserId !== m.userId && (
                       <div className="space-x-2">
                         <button
                           onClick={() => handleAssignLeader(m.userId)}
@@ -228,11 +207,12 @@ const handleViewDetail = async (taskId) => {
                           Xóa
                         </button>
                       </div>
-                    )
-                  ) : null}
-
-                </li>
-              ))}
+                    )}
+                  </li>
+                ))
+              ) : (
+                <li className="text-gray-400 italic">Chưa có thành viên nào</li>
+              )}
             </ul>
           </div>
         ) : (

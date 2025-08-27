@@ -20,7 +20,7 @@ const TaskMenu = ({ menuOpen, setMenuOpen }) => {
 
   return (
     <aside
-      className={`relative z-10 bg-gray-900 bg-opacity-95 text-white p-6 fixed h-full transition-transform duration-300 
+      className={`relative z-10 bg-gray-800 text-gray-100 p-6 fixed h-full transition-transform duration-300 
         ${menuOpen ? "translate-x-0 w-64 shadow-xl" : "-translate-x-full hidden"}`}
     >
       {/* Nút đóng menu */}
@@ -32,46 +32,46 @@ const TaskMenu = ({ menuOpen, setMenuOpen }) => {
       </button>
 
       {/* Tiêu đề */}
-      <h2 className="text-xl font-semibold mb-6 text-orange-400">📌 Menu</h2>
+  <h2 className="text-xl font-semibold mb-6 text-blue-300">Menu</h2>
 
       {/* Danh sách nút */}
-      <nav className="space-y-4">
+      <nav className="space-y-3">
         <button
           onClick={() => handleNavigate("/them-cong-viec-moi")}
-          className="block w-full text-left bg-orange-500 text-white p-3 rounded-lg shadow-md hover:bg-orange-600 transition-all"
+          className="flex items-center w-full text-left bg-blue-600/90 text-gray-100 p-2.5 rounded-xl shadow hover:bg-blue-700/90 transition-all gap-2"
         >
-          <FontAwesomeIcon icon={faPlus} className="mr-2" />
-          Thêm việc mới
+          <FontAwesomeIcon icon={faPlus} className="w-4 h-4" />
+          <span className="text-sm font-medium">Thêm việc mới</span>
         </button>
 
         <button
           onClick={() => handleNavigate("/danh-sach-cong-viec")}
-          className="block w-full text-left bg-orange-500 text-white p-3 rounded-lg shadow-md hover:bg-orange-600 transition-all"
+          className="flex items-center w-full text-left bg-blue-600/90 text-gray-100 p-2.5 rounded-xl shadow hover:bg-blue-700/90 transition-all gap-2"
         >
-          <FontAwesomeIcon icon={faTasks} className="mr-2" />
-          Công việc
+          <FontAwesomeIcon icon={faTasks} className="w-4 h-4" />
+          <span className="text-sm font-medium">Công việc</span>
         </button>
 
         <button
           onClick={() => handleNavigate("/tao-nhom-moi")}
-          className="block w-full text-left bg-orange-500 text-white p-3 rounded-lg shadow-md hover:bg-orange-600 transition-all"
+          className="flex items-center w-full text-left bg-blue-600/90 text-gray-100 p-2.5 rounded-xl shadow hover:bg-blue-700/90 transition-all gap-2"
         >
-          <FontAwesomeIcon icon={faUsers} className="mr-2" />
-          Tạo nhóm mới
+          <FontAwesomeIcon icon={faUsers} className="w-4 h-4" />
+          <span className="text-sm font-medium">Tạo nhóm mới</span>
         </button>
         <button
           onClick={() => handleNavigate("/danh-sach-nhom")}
-          className="block w-full text-left bg-orange-500 text-white p-3 rounded-lg shadow-md hover:bg-orange-600 transition-all"
+          className="flex items-center w-full text-left bg-blue-600/90 text-gray-100 p-2.5 rounded-xl shadow hover:bg-blue-700/90 transition-all gap-2"
         >
-          <FontAwesomeIcon icon={faUserGroup} className="mr-2" />
-          Danh sách nhóm
+          <FontAwesomeIcon icon={faUserGroup} className="w-4 h-4" />
+          <span className="text-sm font-medium">Danh sách nhóm</span>
         </button>
         <button
           onClick={() => handleNavigate("/tham-gia-nhom")}
-          className="block w-full text-left bg-orange-500 text-white p-3 rounded-lg shadow-md hover:bg-orange-600 transition-all"
+          className="flex items-center w-full text-left bg-blue-600/90 text-gray-100 p-2.5 rounded-xl shadow hover:bg-blue-700/90 transition-all gap-2"
         >
-          <FontAwesomeIcon icon={faUserPlus} className="mr-2" />
-          Tham gia nhóm
+          <FontAwesomeIcon icon={faUserPlus} className="w-4 h-4" />
+          <span className="text-sm font-medium">Tham gia nhóm</span>
         </button>
       </nav>
     </aside>

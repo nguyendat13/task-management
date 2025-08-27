@@ -60,79 +60,81 @@ const TaskDetail = () => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto bg-gray-900 text-white p-6 rounded-lg mt-10 shadow-lg">
-      <h2 className="text-2xl font-bold text-orange-400 mb-4">Chi tiết công việc</h2>
+    <div className="min-h-[80vh] flex items-center justify-center bg-gray-900">
+      <div className="w-full max-w-xl bg-gray-800 text-gray-100 p-8 rounded-2xl shadow-lg">
+        <h2 className="text-2xl font-bold text-blue-300 mb-6 text-center">Chi tiết công việc</h2>
 
-      {/* Tiêu đề */}
-      <label className="block mt-3 text-sm">Tiêu đề:</label>
-      <input
-        type="text"
-        name="title"
-        value={task.title}
-        onChange={handleChange}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
-      />
+        {/* Tiêu đề */}
+        <label className="block mt-3 text-sm text-gray-200">Tiêu đề:</label>
+        <input
+          type="text"
+          name="title"
+          value={task.title}
+          onChange={handleChange}
+          className="w-full mt-1 px-3 py-2 bg-gray-900 border border-gray-700 rounded text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
 
-      {/* Mô tả */}
-      <label className="block mt-3 text-sm">Mô tả:</label>
-      <textarea
-        name="description"
-        value={task.description}
-        onChange={handleChange}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
-      />
+        {/* Mô tả */}
+        <label className="block mt-3 text-sm text-gray-200">Mô tả:</label>
+        <textarea
+          name="description"
+          value={task.description}
+          onChange={handleChange}
+          className="w-full mt-1 px-3 py-2 bg-gray-900 border border-gray-700 rounded text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
 
-      {/* Chi tiết */}
-      <label className="block mt-3 text-sm">Chi tiết:</label>
-      <textarea
-        name="detail"
-        value={task.detail}
-        onChange={handleChange}
-        rows={4}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
-      />
+        {/* Chi tiết */}
+        <label className="block mt-3 text-sm text-gray-200">Chi tiết:</label>
+        <textarea
+          name="detail"
+          value={task.detail}
+          onChange={handleChange}
+          rows={4}
+          className="w-full mt-1 px-3 py-2 bg-gray-900 border border-gray-700 rounded text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
 
-      {/* Hạn chót */}
-      <label className="block mt-3 text-sm">Hạn chót:</label>
-      <input
-        type="datetime-local"
-        name="dueDate"
-        value={task.dueDate?.slice(0, 16)}
-        onChange={handleChange}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
-      />
+        {/* Hạn chót */}
+        <label className="block mt-3 text-sm text-gray-200">Hạn chót:</label>
+        <input
+          type="datetime-local"
+          name="dueDate"
+          value={task.dueDate?.slice(0, 16)}
+          onChange={handleChange}
+          className="w-full mt-1 px-3 py-2 bg-gray-900 border border-gray-700 rounded text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        />
 
-      {/* Tiến độ */}
-      <label className="block mt-3 text-sm">Tiến độ:</label>
-      <select
-        name="workProgressId"
-        value={task.workProgressId}
-        onChange={handleChange}
-        className="w-full mt-1 px-3 py-2 bg-gray-800 border border-gray-700 rounded"
-      >
-        {progressList
-          .filter((p) => task.allowedProgressIds?.includes(p.id))
-          .map((p) => (
-            <option key={p.id} value={p.id}>
-              {p.status}
-            </option>
-          ))}
-      </select>
-
-      {/* Nút hành động */}
-      <div className="flex justify-end space-x-2 mt-6">
-        <button
-          onClick={() => navigate("/danh-sach-cong-viec")}
-          className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded"
+        {/* Tiến độ */}
+        <label className="block mt-3 text-sm text-gray-200">Tiến độ:</label>
+        <select
+          name="workProgressId"
+          value={task.workProgressId}
+          onChange={handleChange}
+          className="w-full mt-1 px-3 py-2 bg-gray-900 border border-gray-700 rounded text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
-          Hủy
-        </button>
-        <button
-          onClick={handleUpdate}
-          className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded"
-        >
-          Lưu thay đổi
-        </button>
+          {progressList
+            .filter((p) => task.allowedProgressIds?.includes(p.id))
+            .map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.status}
+              </option>
+            ))}
+        </select>
+
+        {/* Nút hành động */}
+        <div className="flex justify-end space-x-2 mt-8">
+          <button
+            onClick={() => navigate("/danh-sach-cong-viec")}
+            className="bg-gray-700 hover:bg-gray-600 text-gray-100 px-5 py-2 rounded-lg"
+          >
+            Hủy
+          </button>
+          <button
+            onClick={handleUpdate}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-semibold"
+          >
+            Lưu thay đổi
+          </button>
+        </div>
       </div>
     </div>
   );

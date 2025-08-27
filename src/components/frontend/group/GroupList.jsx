@@ -71,59 +71,57 @@ const GroupList = () => {
   };
 
   if (loading)
-    return <p className="text-white text-center mt-10">Đang tải danh sách nhóm...</p>;
+    return <p className="text-gray-400 text-center mt-10">Đang tải danh sách nhóm...</p>;
 
   if (groups.length === 0)
-    return <p className="text-white text-center mt-10">Bạn chưa tham gia nhóm nào.</p>;
+    return <p className="text-gray-400 text-center mt-10">Bạn chưa tham gia nhóm nào.</p>;
 
   return (
-    <div className="relative min-h-screen text-white">
-      <div className="relative z-10 max-w-5xl mx-auto py-12 px-6">
+    <div className="relative min-h-screen bg-gray-900">
+      <div className="relative z-10 max-w-2xl mx-auto py-10 px-4">
         {/* Nút quay lại */}
         <div className="mb-6">
           <button
             onClick={() => navigate("/")}
-            className="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded shadow transition"
+            className="px-4 py-2 bg-gray-800 border border-gray-700 hover:bg-gray-700 text-gray-100 rounded-lg shadow-sm transition"
           >
             &larr; Quay lại
           </button>
         </div>
 
-        <h2 className="text-3xl font-bold text-center text-orange-400 mb-8">
+        <h2 className="text-2xl font-bold text-center text-blue-300 mb-8 tracking-tight">
           Danh sách nhóm của bạn
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="space-y-5">
           {groups.map((group) => (
             <div
               key={group.id}
-              className="bg-gray-800 border border-gray-700 rounded-lg p-6 shadow-md hover:shadow-orange-500 transition duration-300"
+              className="bg-gray-800 border border-gray-700 rounded-xl p-5 shadow hover:shadow-blue-900 transition duration-200"
             >
-              <h3 className="text-xl font-semibold text-orange-300 mb-2">{group.name}</h3>
-              <p className="text-gray-300 mb-4">{group.duty || "Không có mô tả."}</p>
+              <h3 className="text-lg font-semibold text-gray-100 mb-2">{group.name}</h3>
+              <p className="text-gray-400 mb-4">{group.duty || "Không có mô tả."}</p>
 
-              <div className="text-sm text-gray-400 space-y-1">
-                <p>
-                  <span className="text-gray-500">Ngày tạo:</span>{" "}
-                  {new Date(group.createdAt).toLocaleDateString()}
-                </p>
-                <p>
-                  <span className="text-gray-500">Số công việc:</span>{" "}
-                  {group.taskTitles?.length || 0}
-                </p>
+              <div className="text-sm text-gray-400 flex flex-wrap gap-6 mb-2">
+                <span>
+                  <span className="text-gray-300">Ngày tạo:</span> {new Date(group.createdAt).toLocaleDateString()}
+                </span>
+                <span>
+                  <span className="text-gray-300">Số công việc:</span> {group.taskTitles?.length || 0}
+                </span>
               </div>
 
-              <div className="flex justify-between mt-4">
+              <div className="flex justify-end gap-3 mt-4">
                 <button
                   onClick={() => navigate(`/nhom/${group.id}`)}
-                  className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-white shadow"
+                  className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-white text-xs font-medium shadow-sm"
                 >
                   Xem chi tiết
                 </button>
 
                 <button
                   onClick={() => handleDeleteGroup(group.id)}
-                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white shadow"
+                  className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-white text-xs font-medium shadow-sm"
                 >
                   Xóa nhóm
                 </button>

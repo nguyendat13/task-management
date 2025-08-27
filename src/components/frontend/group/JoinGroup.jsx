@@ -27,9 +27,9 @@ const JoinGroup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center  text-white px-4">
-      <div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-2xl font-bold text-orange-400 mb-6 text-center">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-gray-100 px-4">
+      <div className="bg-gray-800 p-10 rounded-2xl shadow-2xl max-w-md w-full border border-gray-700">
+        <h2 className="text-2xl font-bold text-blue-300 mb-8 text-center">
           Tham gia nhóm bằng mã
         </h2>
 
@@ -38,24 +38,24 @@ const JoinGroup = () => {
           value={groupCode}
           onChange={(e) => setGroupCode(e.target.value)}
           placeholder="Nhập mã nhóm..."
-          className="w-full px-4 py-2 mb-4 rounded bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+          className="w-full px-4 py-3 mb-6 rounded-xl bg-gray-700 text-gray-100 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
         <button
           onClick={handleJoin}
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded transition"
+          className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3 rounded-xl font-semibold shadow transition"
         >
           Tham gia
         </button>
 
         {message && (
-          <p className="mt-4 text-center text-sm text-orange-300">{message}</p>
+          <p className="mt-6 text-center text-base text-orange-300">{message}</p>
         )}
 
-        <div className="mt-6 text-center">
+        <div className="mt-8 text-center">
           <button
             onClick={() => navigate("/")}
-            className="text-gray-400 hover:text-white transition"
+            className="text-gray-400 hover:text-white transition text-base"
           >
             &larr; Quay lại trang chính
           </button>
