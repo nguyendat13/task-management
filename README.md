@@ -1,92 +1,101 @@
-# 📝 Task Management Web App
+# Task Management Web App
 
-A web application for managing personal or team tasks. Users can create groups, assign tasks, and track progress collaboratively. Built with **React.js + TailwindCSS** for the frontend and **ASP.NET Core Web API + Entity Framework Core** for the backend, using **MySQL** as the database.
-
----
-
-## 🚀 Key Features
-
-- 🔐 User registration, login, and role-based authorization
-- 👥 Create or join groups via group code
-- ✅ Create and assign tasks to group members
-- 📅 Track task status (Pending, In Progress, Done)
-- 🧑‍🤝‍🧑 Manage group members (Leader, Member)
-- 📊 Monitor task progress with status updates
-- 🔄 Seamless communication between frontend and backend via RESTful APIs
+Ứng dụng web quản lý công việc cá nhân hoặc theo nhóm. Người dùng có thể tạo nhóm, phân công nhiệm vụ và theo dõi tiến độ một cách cộng tác.  
+Ứng dụng được xây dựng với **React.js + TailwindCSS** cho frontend và **ASP.NET Core Web API + Entity Framework Core** cho backend, sử dụng **MySQL** làm cơ sở dữ liệu.
 
 ---
 
-## 🛠️ Technologies Used
+## Chức năng chính
 
-### 📌 Frontend
+### Người dùng
+- Đăng ký, đăng nhập và phân quyền người dùng.  
 
-- [React.js](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- React Router, Axios
+### Nhóm
+- Tạo hoặc tham gia nhóm bằng mã nhóm.  
+- Quản lý thành viên nhóm (Leader, Member).  
 
-### 📌 Backend
+### Nhiệm vụ
+- Tạo và phân công nhiệm vụ cho các thành viên trong nhóm.  
+- Theo dõi trạng thái nhiệm vụ (Pending, In Progress, Done).  
+- Giám sát tiến độ công việc thông qua trạng thái cập nhật.  
 
-- [ASP.NET Core Web API](https://dotnet.microsoft.com/en-us/apps/aspnet)
-- [Entity Framework Core (EF Core)](https://learn.microsoft.com/en-us/ef/core/)
-- JWT Authentication
-- RESTful API design
+### Hệ thống
+- Giao tiếp giữa frontend và backend thông qua RESTful API.  
 
-### 📌 Database
+---
 
-- [MySQL](https://www.mysql.com/)
+## Công nghệ sử dụng
+
+### Frontend
+- [React.js](https://reactjs.org/)  
+- [Tailwind CSS](https://tailwindcss.com/)  
+- React Router, Axios  
+
+### Backend
+- [ASP.NET Core Web API](https://dotnet.microsoft.com/en-us/apps/aspnet)  
+- [Entity Framework Core (EF Core)](https://learn.microsoft.com/en-us/ef/core/)  
+- JWT Authentication  
+- RESTful API design  
+
+### Database
+- [MySQL](https://www.mysql.com/)  
+
+---
+
+## Cách cài đặt và chạy dự án
+
+### 1. Clone repository
+```bash
+	git clone https://github.com/nguyendat13/fruit-store.git
+
+### 2. Di chuyển vào thư mục backend
+	cd fruit-store
+
+### 3. Khôi phục các package
+	dotnet restore
+
+### 4. Chạy migration và khởi tạo database
+	dotnet ef database update
+
+### 5. Chạy dự án
+	dotnet run
+---
+
+## Liên hệ
+
+Nếu bạn có bất kỳ thắc mắc hoặc góp ý nào, vui lòng tạo issue hoặc liên hệ trực tiếp qua:
+
+Email: dat48421@gmail.com
+
+GitHub: nguyendat13
+
+---
+
+## Các lệnh khác
+dotnet watch run
+
+Chạy ứng dụng và tự động theo dõi thay đổi file (phù hợp cho phát triển và gỡ lỗi).
+
+dotnet build
+
+Biên dịch ứng dụng và tất cả các phụ thuộc.
+
+dotnet publish
+
+Biên dịch và đóng gói ứng dụng cho môi trường production vào thư mục bin/Release/netX/publish.
+Thay netX bằng phiên bản .NET tương ứng (ví dụ: net6.0).
+
+dotnet test
+
+Chạy tất cả unit test trong solution (nếu có).
 
 ---
 
 
-# Getting Started with ASP.NET Core
-
-This project was built using **ASP.NET Core**.
-
-## Available Commands
-
-In the project directory, you can run:
-
-### `dotnet run`
-
-Runs the app in development mode.  
-Open `http://localhost:5000` or `https://localhost:5001` to view it in your browser (depending on your launch settings).
-
-The app will restart automatically when you make code changes.
-
----
-
-### `dotnet watch run`
-
-Runs the app and watches for file changes.  
-Good for development and debugging.
-
----
-
-### `dotnet build`
-
-Builds the application and all its dependencies.
-
----
-
-### `dotnet publish`
-
-Builds and publishes the app for production to the `bin/Release/netX/publish` folder.  
-Replace `netX` with your .NET version (e.g., `net6.0` or `net7.0`).
-
----
-
-### `dotnet test`
-
-Runs all unit tests in the solution (if available).
-
----
-
-## Project Structure
-
-├── Controllers/ # API or MVC controllers
-├── Models/ # Data models or entities
-├── Data/ # Database context and seeding
-├── Services/ # Business logic
-├── Program.cs # Main entry point
-└── appsettings.json # App configuration
-
+## Cấu trúc dự án
+├── Controllers/      # API hoặc MVC controllers
+├── Models/           # Các model dữ liệu hoặc entity
+├── Data/             # Database context và seeding
+├── Services/         # Business logic
+├── Program.cs        # Điểm khởi đầu của ứng dụng
+└── appsettings.json  # File cấu hình ứng dụng
