@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "g0tCtP61AYQ=",
+  "dgSpecHash": "uPJq5QZy0gg=",
   "success": true,
-  "projectFilePath": "D:\\projects\\.net\\taskmanager\\taskmanager\\taskmanager.csproj",
+  "projectFilePath": "D:\\projects\\Taskmannagement\\taskmanager\\taskmanager\\taskmanager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nguyen phat dat\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\nguyen phat dat\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\8.0.5\\microsoft.aspnetcore.authentication.google.8.0.5.nupkg.sha512",

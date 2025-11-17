@@ -2877,11 +2877,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\.net\\taskmanager\\taskmanager\\taskmanager.csproj",
+      "projectUniqueName": "D:\\projects\\Taskmannagement\\taskmanager\\taskmanager\\taskmanager.csproj",
       "projectName": "taskmanager",
-      "projectPath": "D:\\projects\\.net\\taskmanager\\taskmanager\\taskmanager.csproj",
+      "projectPath": "D:\\projects\\Taskmannagement\\taskmanager\\taskmanager\\taskmanager.csproj",
       "packagesPath": "C:\\Users\\nguyen phat dat\\.nuget\\packages\\",
-      "outputPath": "D:\\projects\\.net\\taskmanager\\taskmanager\\obj\\",
+      "outputPath": "D:\\projects\\Taskmannagement\\taskmanager\\taskmanager\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
